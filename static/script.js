@@ -80,9 +80,7 @@ async function displayComponents() {
         const addButton = document.createElement('button');
         addButton.textContent = 'Add';
         addButton.onclick = () => {
-            // Functionality to add a new component can be implemented here
-            // alert(`Add new ${type} component functionality to be implemented.`);
-            openModal();
+            openModal(type);
         };
 
         // Append the title and button to the header div
@@ -201,9 +199,10 @@ function stopResize() {
 // The Add component window:
 
 // Function to open the modal
-function openModal() {
+function openModal(component_type) {
     const modal = document.getElementById('add-component-modal');
     modal.style.display = 'block';
+    console.log(`Creating new component of the ${component_type} type`);
 }
 
 // Function to close the modal
