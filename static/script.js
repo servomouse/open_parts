@@ -59,7 +59,14 @@ const fields = {
     ics: ["name", "case", "description"],
 };
 
-function displayComponents() {
+async function fetchComponents() {
+    const response = await fetch('/api/components');
+    const componentsData = await response.json();
+    return componentsData;
+}
+
+async function displayComponents() {
+    const componentsData = await fetchComponents();
     const componentList = document.getElementById('components');
     componentList.innerHTML = '';
 
