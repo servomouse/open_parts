@@ -71,6 +71,23 @@ async function displayComponents() {
     componentList.innerHTML = '';
 
     for (const type in components) {
+        // // Create a section for each component type
+        // const subtableSection = document.createElement('subtable-header-section');
+        // const subtableSectionHeader = document.createElement('h3');
+        // subtableSectionHeader.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize type
+
+        // // Create the "Add" button
+        // const addButton = document.createElement('button');
+        // addButton.textContent = 'Add';
+        // addButton.onclick = () => {
+        //     // Placeholder for add functionality
+        //     console.log(`Add button clicked for ${type}`);
+        // };
+
+        // // Append header and button to the section
+        // subtableSectionHeader.appendChild(addButton);
+        // subtableSection.appendChild(subtableSectionHeader);
+    
         // Create a sub-table for each component type
         const table = document.createElement('table');
         const headerRow = document.createElement('tr');
