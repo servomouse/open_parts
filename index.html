@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenParts - Electronic Components Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>OpenParts - Electronic Components Manager</h1>
+    </header>
+
+    <main>
+        <section id="component-list">
+            <h2>Available Components</h2>
+            <input type="text" id="search-bar" placeholder="Search components...">
+            <ul id="components">
+                <!-- Dynamic list of components will be populated here -->
+            </ul>
+        </section>
+
+        <div id="resizer"></div>
+
+        <section id="component-details">
+            <h2>Component Details</h2>
+            <div id="details">
+                <img id="component-image" src="" alt="Component Image">
+                <h3 id="component-name"></h3>
+                <p id="component-description"></p>
+                <h4>KiCAD Links</h4>
+                <ul id="kicad-links">
+                    <!-- Links to KiCAD files will be populated here -->
+                </ul>
+                <h4>3D Model</h4>
+                <div id="3d-viewer">
+                    <!-- Placeholder for 3D viewer -->
+                    <p>3D model will be displayed here.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 OpenParts</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
