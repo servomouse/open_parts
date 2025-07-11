@@ -5,11 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenParts - Electronic Components Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='modal-styles.css') }}">
 </head>
 <body>
     <header>
         <h1>OpenParts - Electronic Components Manager</h1>
     </header>
+
+    <!-- Modal Structure -->
+    <div id="add-component-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-modal">&times;</span>
+            <h2>Add New Component</h2>
+            <form id="add-component-form">
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category" required>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="case">Case:</label>
+                <input type="text" id="case" name="case">
+
+                <label for="value">Value:</label>
+                <input type="text" id="value" name="value">
+
+                <label for="precision">Precision:</label>
+                <input type="text" id="precision" name="precision">
+
+                <label for="voltage">Voltage:</label>
+                <input type="text" id="voltage" name="voltage">
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description"></textarea>
+
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image">
+
+                <label for="kicad_links">KiCAD Links:</label>
+                <input type="file" id="kicad_links" name="kicad_links" multiple>
+                <button type="button" id="add-kicad-link">Add Another Link</button>
+
+                <label for="model">Model:</label>
+                <input type="file" id="model" name="model">
+
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+
+                <button type="button" id="add-component-button">Add</button>
+            </form>
+        </div>
+    </div>
 
     <main>
         <section id="component-list">
