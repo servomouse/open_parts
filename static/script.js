@@ -1,57 +1,4 @@
-const components = {
-    resistors: [
-        {
-            id: "0603_10k_1%",
-            name: "10k Ohm Resistor",
-            case: "0603",
-            value: "10k",
-            precision: "1%",
-            description: "Standard 10k Ohm resistor.",
-            image: "path/to/resistor-image.jpg",
-            kicadLinks: ["link/to/footprint", "link/to/symbol"],
-            model: "path/to/3d-model.step",
-            amount: 10
-        },
-        {
-            id: "0603_100k_1%",
-            name: "100k Ohm Resistor",
-            case: "0603",
-            value: "100k",
-            precision: "1%",
-            description: "Standard 10k Ohm resistor.",
-            image: "path/to/resistor-image.jpg",
-            kicadLinks: ["link/to/footprint", "link/to/symbol"],
-            model: "path/to/3d-model.step",
-            amount: 10
-        }
-    ],
-    capacitors: [
-        {
-            id: "0805_10uF_50v",
-            name: "10uF Capacitor",
-            case: "0805",
-            value: "10uF",
-            voltage: "500000000000000000v",
-            description: "Electrolytic capacitor, 100uF.",
-            image: "path/to/capacitor-image.jpg",
-            kicadLinks: ["link/to/footprint", "link/to/symbol"],
-            model: "path/to/3d-model.step",
-            amount: 10
-        }
-    ],
-    ics: [
-        {
-            id: "ne555_dip8",
-            name: "NE555 Timer",
-            case: "DIP-8",
-            description: "Simple timer",
-            image: "path/to/capacitor-image.jpg",
-            kicadLinks: ["link/to/footprint", "link/to/symbol"],
-            model: "path/to/3d-model.step",
-            amount: 10
-        }
-    ]
-};
+let components = null;
 
 const fields = {
     resistors: ["name", "case", "value", "precision", "description"],
@@ -59,35 +6,27 @@ const fields = {
     ics: ["name", "case", "description"],
 };
 
+// Function to fetch components from the backend
 async function fetchComponents() {
-    const response = await fetch('/api/components');
-    const componentsData = await response.json();
-    return componentsData;
+    try {
+        const response = await fetch('/api/components');
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return await response.json();
+        // displayComponents(components);
+    } catch (error) {
+        console.error('Error fetching components:', error);
+        return {};
+    }
 }
 
 async function displayComponents() {
-    const componentsData = await fetchComponents();
+    components = await fetchComponents();
     const componentList = document.getElementById('components');
     componentList.innerHTML = '';
 
     for (const type in components) {
-        // // Create a section for each component type
-        // const subtableSection = document.createElement('subtable-header-section');
-        // const subtableSectionHeader = document.createElement('h3');
-        // subtableSectionHeader.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize type
-
-        // // Create the "Add" button
-        // const addButton = document.createElement('button');
-        // addButton.textContent = 'Add';
-        // addButton.onclick = () => {
-        //     // Placeholder for add functionality
-        //     console.log(`Add button clicked for ${type}`);
-        // };
-
-        // // Append header and button to the section
-        // subtableSectionHeader.appendChild(addButton);
-        // subtableSection.appendChild(subtableSectionHeader);
-    
         // Create a sub-table for each component type
         const table = document.createElement('table');
         const headerRow = document.createElement('tr');
