@@ -68,9 +68,29 @@ async function displayComponents() {
 
         // Add the table to the component list
         const section = document.createElement('section');
+        const headerDiv = document.createElement('div'); // Create a div for the header
+        headerDiv.style.display = 'flex'; // Use flexbox for alignment
+        headerDiv.style.justifyContent = 'space-between'; // Space between title and button
+        headerDiv.style.width = 'calc(100% - 20px)';
+
         const sectionHeader = document.createElement('h3');
         sectionHeader.textContent = type.charAt(0).toUpperCase() + type.slice(1); // Capitalize type
-        section.appendChild(sectionHeader);
+
+        // Create the "Add" button
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add';
+        addButton.onclick = () => {
+            // Functionality to add a new component can be implemented here
+            // alert(`Add new ${type} component functionality to be implemented.`);
+            openModal();
+        };
+
+        // Append the title and button to the header div
+        headerDiv.appendChild(sectionHeader);
+        headerDiv.appendChild(addButton);
+
+        // Append the header div to the section
+        section.appendChild(headerDiv);
         section.appendChild(table);
         componentList.appendChild(section);
     }
@@ -177,3 +197,20 @@ function stopResize() {
     window.removeEventListener('mousemove', resize);
     window.removeEventListener('mouseup', stopResize);
 }
+
+// The Add component window:
+
+// Function to open the modal
+function openModal() {
+    const modal = document.getElementById('add-component-modal');
+    modal.style.display = 'block';
+}
+
+// Function to close the modal
+function closeModal() {
+    const modal = document.getElementById('add-component-modal');
+    modal.style.display = 'none';
+}
+
+// Event listener for the close button
+document.getElementById('close-modal').addEventListener('click', closeModal);
