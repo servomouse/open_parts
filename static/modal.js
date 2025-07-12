@@ -1,0 +1,130 @@
+function createForm(formType, label, name) {
+    const formGroup = document.createElement('div');
+    formGroup.classList.add("form-group");
+    const newLabel = document.createElement('label');
+    newLabel.textContent = label;
+    newLabel.setAttribute("for", name);
+    formGroup.appendChild(newLabel);
+
+    if(formType==="textarea") {
+        const textarea = document.createElement("textarea");
+
+        // Set attributes for the textarea (optional)
+        textarea.setAttribute("id", `add-component-form-${name}`);
+        textarea.setAttribute("name", `add-component-form-${name}`);
+        // textarea.setAttribute("rows", "5");
+        // textarea.setAttribute("cols", "50");
+        textarea.setAttribute("placeholder", "Short component description...");
+
+        // textarea.value = "This is some initial text.";   // Set initial content (optional)
+
+        formGroup.appendChild(textarea);
+    } else {
+        const inputElement = document.createElement('input');
+        inputElement.type = formType;
+        // inputElement.placeholder = 'Enter text here';
+        inputElement.id = `add-component-form-${name}`;
+        inputElement.name = `add-component-form-${name}`;
+        formGroup.appendChild(inputElement);
+    }
+
+    return formGroup;
+}
+
+// Function to handle the form submission
+async function handleAddComponent() {
+    const formData = new FormData(document.getElementById('add-component-form'));
+    const data = {
+        category: document.getElementById('add-component-form-header').textContent.split(' ')[2].toLowerCase(), // Get the category from the header
+        name: formData.get('add-component-form-name'),
+        case: formData.get('add-component-form-case'),
+        value: formData.get('add-component-form-value'),
+        precision: formData.get('add-component-form-precision'),
+        voltage: formData.get('add-component-form-voltage'),
+        description: formData.get('add-component-form-Description'),
+        image: formData.get('add-component-form-image'), // Handle file upload if needed
+        kicad_links: formData.get('add-component-form-kicad_links') ? formData.get('add-component-form-kicad_links').split(',') : [],
+        model: formData.get('add-component-form-model'),
+        amount: parseInt(formData.get('add-component-form-amount'), 10) || 0
+    };
+
+    try {
+        const response = await fetch('/api/components', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        const newComponent = await response.json();
+        console.log('Component added:', newComponent);
+        closeModal(); // Close the modal after adding the component
+        displayComponents(); // Refresh the component list
+    } catch (error) {
+        console.error('Error adding component:', error);
+    }
+}
+
+// Function to open the modal
+export function openModal(component_type) {    // add-component-form-header
+    console.log(`Creating new component of the ${component_type} type`);
+    const addComponentForm = document.getElementById('add-component-form');
+    const addComponentFormHeader = document.getElementById('add-component-form-header');
+    addComponentForm.innerHTML = '';
+
+    addComponentForm.appendChild(createForm("text", "Name:", "name"));
+    addComponentForm.appendChild(createForm("text", "Case:", "case"));
+
+    switch (component_type) {
+        case "resistors":
+            addComponentForm.appendChild(createForm("text", "Value:", "value"));
+            addComponentForm.appendChild(createForm("text", "Precision:", "precision"));
+            addComponentForm.appendChild(createForm("text", "Power disipation:", "power"));
+            break;
+        case "capacitors":
+            addComponentForm.appendChild(createForm("text", "Value:", "value"));
+            addComponentForm.appendChild(createForm("text", "Type:", "type"));
+            addComponentForm.appendChild(createForm("text", "Voltage:", "voltage"));
+            break;
+        case "ics":
+            break;  // No additional fields
+        default:
+            alert(`Error: Unknown component type: ${component_type}!`);
+    }
+
+    // Common part:
+    addComponentForm.appendChild(createForm("textarea", "Description:", "Description"));
+    addComponentForm.appendChild(createForm("file", "Image:", "image"));
+    addComponentForm.appendChild(createForm("file", "KiCAD Links:", "kicad_links"));
+    addComponentForm.appendChild(createForm("file", "Model:", "model"));
+    addComponentForm.appendChild(createForm("number", "Amount:", "amount"));
+
+    // <button type="button" id="add-component-button" class="submit-button">Add</button>
+    const addButton = document.createElement('button');
+    addButton.classList.add("submit-button");
+    addButton.textContent = 'Add';
+    addButton.id = "add-component-button";
+    addButton.addEventListener('click', (event) => {
+        // alert('Button clicked!');
+        event.preventDefault(); // Prevent default form submission
+        handleAddComponent(); // Call the function to handle adding the component
+    });
+    addComponentForm.appendChild(addButton);
+
+    const modal = document.getElementById('add-component-modal');
+    modal.style.display = 'block';  // Make the window visible
+}
+
+// Function to close the modal
+function closeModal() {
+    const modal = document.getElementById('add-component-modal');
+    modal.style.display = 'none';   // Hide the window
+}
+
+// Event listener for the close button
+document.getElementById('close-modal').addEventListener('click', closeModal);
