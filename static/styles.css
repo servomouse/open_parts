@@ -74,6 +74,11 @@ tr:nth-child(odd) {
     background-color: lightgreen; /* Light green for odd rows */
 }
 
+tr:hover {
+    background-color: rgb(233, 219, 144); /* Change to a lighter blue on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
 #component-image {
     max-width: 100%;
     height: auto;

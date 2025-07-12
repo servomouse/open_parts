@@ -1,3 +1,5 @@
+import { displayComponents } from './components.js';
+
 function createForm(formType, label, name) {
     const formGroup = document.createElement('div');
     formGroup.classList.add("form-group");
@@ -77,8 +79,6 @@ export function openModal(component_type) {    // add-component-form-header
     const addComponentFormHeader = document.getElementById('add-component-form-header');
     addComponentForm.innerHTML = '';
 
-    addComponentForm.appendChild(createForm("text", "Name:", "name"));
-    addComponentForm.appendChild(createForm("text", "Case:", "case"));
 
     switch (component_type) {
         case "resistors":
@@ -92,10 +92,12 @@ export function openModal(component_type) {    // add-component-form-header
             addComponentForm.appendChild(createForm("text", "Voltage:", "voltage"));
             break;
         case "ics":
-            break;  // No additional fields
+            addComponentForm.appendChild(createForm("text", "Name:", "name"));
+            break;
         default:
             alert(`Error: Unknown component type: ${component_type}!`);
     }
+    addComponentForm.appendChild(createForm("text", "Case:", "case"));
 
     // Common part:
     addComponentForm.appendChild(createForm("textarea", "Description:", "Description"));

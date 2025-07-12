@@ -50,8 +50,6 @@ export async function displayComponents() {
         // Populate the table with component data
         components[type].forEach((component, index) => {
             const row = document.createElement('tr');
-            // Alternate row colors
-            row.style.backgroundColor = index % 2 === 0 ? 'lightblue' : 'lightgreen';
 
             fields[type].forEach(field => {
                 const td = document.createElement('td');
