@@ -1,10 +1,11 @@
-import { components } from './components.js';
+import { getComponents } from './components.js';
 
 export function initSearch() {
     document.getElementById('search-bar').addEventListener('input', function() {
         const query = this.value.toLowerCase();
         const filteredComponents = {};
         
+        const components = getComponents();
         for (const type in components) {
             filteredComponents[type] = components[type].filter(component => 
                 component.name.toLowerCase().includes(query)
