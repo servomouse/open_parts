@@ -15,6 +15,7 @@ class Component(db.Model):
     value       = db.Column(db.String(50))
     precision   = db.Column(db.String(10))
     voltage     = db.Column(db.String(50))
+    technology  = db.Column(db.String(50))
     description = db.Column(db.Text)
     image       = db.Column(db.String(200))
     kicad_links = db.Column(db.Text)  # Store as comma-separated values
@@ -30,6 +31,7 @@ class Component(db.Model):
             'value': self.value,
             'precision': self.precision,
             'voltage': self.voltage,
+            'technology': self.technology,
             'description': self.description,
             'image': self.image,
             'kicad_links': self.kicad_links.split(',') if self.kicad_links else [],
@@ -68,6 +70,7 @@ def add_component():
         value=data.get('value'),
         precision=data.get('precision'),
         voltage=data.get('voltage'),
+        technology=data.get('technology'),
         description=data.get('description'),
         image=data.get('image'),
         kicad_links=','.join(data.get('kicad_links', [])),
@@ -94,6 +97,7 @@ def populate_database():
                     'case': "0603",
                     'value': "10k",
                     'precision': "1%",
+                    'technology': "film",
                     'description': "Standard 10k Ohm resistor.",
                     'image': "path/to/resistor-image.jpg",
                     'kicad_links': ["link/to/footprint", "link/to/symbol"],
@@ -105,6 +109,7 @@ def populate_database():
                     'case': "0603",
                     'value': "100k",
                     'precision': "1%",
+                    'technology': "film",
                     'description': "Standard 100k Ohm resistor.",
                     'image': "path/to/resistor-image.jpg",
                     'kicad_links': ["link/to/footprint", "link/to/symbol"],
@@ -118,6 +123,7 @@ def populate_database():
                     'case': "0805",
                     'value': "10uF",
                     'voltage': "50V",
+                    'technology': "electrolytic",
                     'description': "Electrolytic capacitor, 10uF.",
                     'image': "path/to/capacitor-image.jpg",
                     'kicad_links': ["link/to/footprint", "link/to/symbol"],
@@ -129,6 +135,7 @@ def populate_database():
                 {
                     'name': "NE555 Timer",
                     'case': "DIP-8",
+                    'technology': "CMOS",
                     'description': "Simple timer",
                     'image': "path/to/ic-image.jpg",
                     'kicad_links': ["link/to/footprint", "link/to/symbol"],
@@ -148,6 +155,7 @@ def populate_database():
                     value=component.get('value'),
                     precision=component.get('precision'),
                     voltage=component.get('voltage'),
+                    technology=component.get('technology'),
                     description=component.get('description'),
                     image=component.get('image'),
                     kicad_links=','.join(component.get('kicad_links', [])),
