@@ -1,4 +1,5 @@
-import { displayComponents } from './components.js';
+import { addComponent } from './components.js';
+import { displayComponents } from './display_components.js';
 
 function createForm(formType, label, name) {
     const formGroup = document.createElement('div');
@@ -34,53 +35,58 @@ function createForm(formType, label, name) {
 }
 
 // Function to handle the form submission
-async function handleAddComponent() {
+async function handleAddComponent(componentCategory) {
     const formData = new FormData(document.getElementById('add-component-form'));
-    const data = {
-        category: document.getElementById('add-component-form-header').textContent.split(' ')[2].toLowerCase(), // Get the category from the header
-        name: formData.get('add-component-form-name'),
-        case: formData.get('add-component-form-case'),
-        value: formData.get('add-component-form-value'),
-        precision: formData.get('add-component-form-precision'),
-        voltage: formData.get('add-component-form-voltage'),
-        description: formData.get('add-component-form-Description'),
-        image: formData.get('add-component-form-image'), // Handle file upload if needed
-        kicad_links: formData.get('add-component-form-kicad_links') ? formData.get('add-component-form-kicad_links').split(',') : [],
-        model: formData.get('add-component-form-model'),
+    // console.log(`KiCAD link: ${formData.get('add-component-form-kicad_links')}`);
+    const newComponent = {
+        category: componentCategory,
+        name: formData.get('add-component-form-name') || '',
+        case: formData.get('add-component-form-case') || '',
+        value: formData.get('add-component-form-value') || '',
+        precision: formData.get('add-component-form-precision') || '',
+        voltage: formData.get('add-component-form-voltage') || '',
+        technology: formData.get('add-component-form-technology') || '',
+        description: formData.get('add-component-form-Description') || '',
+        // image: formData.get('add-component-form-image'), // Handle file upload if needed
+        // kicad_links: formData.get('add-component-form-kicad_links') ? formData.get('add-component-form-kicad_links').split(',') : [],
+        // model: formData.get('add-component-form-model') || '',
         amount: parseInt(formData.get('add-component-form-amount'), 10) || 0
     };
 
-    try {
-        const response = await fetch('/api/components', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+    addComponent(componentCategory, newComponent);
+    displayComponents(null); // Refresh the component list
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
+    // try {
+    //     const response = await fetch('/api/components', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(data),
+    //     });
 
-        const newComponent = await response.json();
-        console.log('Component added:', newComponent);
-        closeModal(); // Close the modal after adding the component
-        displayComponents(); // Refresh the component list
-    } catch (error) {
-        console.error('Error adding component:', error);
-    }
+    //     if (!response.ok) {
+    //         throw new Error('Network response was not ok');
+    //     }
+
+    //     const newComponent = await response.json();
+    //     console.log('Component added:', newComponent);
+    //     closeModal(); // Close the modal after adding the component
+    // } catch (error) {
+    //     console.error('Error adding component:', error);
+    // }
+    closeModal();
 }
 
 // Function to open the modal
-export function openModal(component_type) {    // add-component-form-header
-    console.log(`Creating new component of the ${component_type} type`);
+export function openModal(componentCategory) {    // add-component-form-header
+    console.log(`Creating new component of the ${componentCategory} type`);
     const addComponentForm = document.getElementById('add-component-form');
     const addComponentFormHeader = document.getElementById('add-component-form-header');
     addComponentForm.innerHTML = '';
 
 
-    switch (component_type) {
+    switch (componentCategory) {
         case "resistors":
             addComponentForm.appendChild(createForm("text", "Value:", "value"));
             addComponentForm.appendChild(createForm("text", "Precision:", "precision"));
@@ -95,7 +101,7 @@ export function openModal(component_type) {    // add-component-form-header
             addComponentForm.appendChild(createForm("text", "Name:", "name"));
             break;
         default:
-            alert(`Error: Unknown component type: ${component_type}!`);
+            alert(`Error: Unknown component type: ${componentCategory}!`);
     }
     addComponentForm.appendChild(createForm("text", "Case:", "case"));
 
@@ -114,7 +120,7 @@ export function openModal(component_type) {    // add-component-form-header
     addButton.addEventListener('click', (event) => {
         // alert('Button clicked!');
         event.preventDefault(); // Prevent default form submission
-        handleAddComponent(); // Call the function to handle adding the component
+        handleAddComponent(componentCategory); // Call the function to handle adding the component
     });
     addComponentForm.appendChild(addButton);
 

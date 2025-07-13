@@ -75,7 +75,7 @@ tr:nth-child(odd) {
 }
 
 tr:hover {
-    background-color: rgb(233, 219, 144); /* Change to a lighter blue on hover */
+    background-color: rgb(233, 219, 144); /* Change the color on hover */
     cursor: pointer; /* Change cursor to pointer */
 }
 
