@@ -1,0 +1,64 @@
+.details-container {
+    display: flex;
+    /* align-items: stretch; Stretch items to match the height of the tallest item */
+    margin-bottom: 20px; /* Space between details and other sections */
+    width: 100%; /* Ensure the container takes full width */
+}
+
+.component-info {
+    flex: 1; /* Allow this section to take available space */
+    margin-right: 20px; /* Space between info and image/model */
+    max-width: 50%; /* Limit to 50% of the container */
+    overflow: auto; /* Handle overflow if text is too long */
+}
+
+.image-and-model-container {
+    flex: 1; /* Allow this column to grow */
+    max-width: 50%; /* Limit to 50% of the container */
+    display: flex; /* Use flexbox for images */
+    flex-direction: column; /* Stack images vertically */
+    justify-content: flex-start; /* Align images to the top */
+}
+
+.component-image  div {
+    flex: 1; /* Allow each image container to grow equally */
+    display: flex; /* Use flexbox for image alignment */
+    justify-content: center; /* Center images horizontally */
+    align-items: center; /* Center images vertically */
+}
+
+.component-image img .component-3d-model {
+    max-width: 100%; /* Ensure images do not exceed their container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.component-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.component-info li {
+    margin: 10px 0;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    width: 100%; /* Ensure the list item takes full width */
+}
+
+.kicad-input-field-name {
+    margin-right: 10px; /* Add some space between the label and input */
+}
+
+.component-info input[type="text"] {
+    flex: 1; /* Allow the input field to grow and take available space */
+    margin-right: 10px; /* Add some space between the input and button */
+    margin-left: 10px;
+    padding: 5px;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.component-info button {
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    margin-left: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}

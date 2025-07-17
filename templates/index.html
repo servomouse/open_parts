@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenParts - Electronic Components Manager</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='component-details.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='modal-styles.css') }}">
 </head>
 <body>
@@ -31,20 +32,42 @@
 
         <div id="resizer"></div>
 
+        
         <section id="component-details">
             <h2>Component Details</h2>
-            <div id="details">
-                <img id="component-image" src="" alt="Component Image">
-                <h3 id="component-name"></h3>
-                <p id="component-description"></p>
-                <h4>KiCAD Links</h4>
-                <ul id="kicad-links">
-                    <!-- Links to KiCAD files will be populated here -->
-                </ul>
-                <h4>3D Model</h4>
-                <div id="3d-viewer">
-                    <!-- Placeholder for 3D viewer -->
-                    <p>3D model will be displayed here.</p>
+            <div class="details-container">
+                <div class="component-info">
+                    <h3 id="component-name">10k Ohm Resistor</h3>
+                    <p><strong>Category:</strong> <span id="component-category">Resistor</span></p>
+                    <p><strong>Value:</strong> <span id="component-value">10k</span></p>
+                    <p><strong>Precision:</strong> <span id="component-precision">1%</span></p>
+                    <p><strong>Case:</strong> <span id="component-case">0603</span></p>
+                    <p><strong>Technology:</strong> <span id="component-technology">Film</span></p>
+                    <p><strong>Amount Available:</strong> <span id="component-amount">10</span></p>
+                    <p><strong>Description:</strong> <span id="component-description">Standard 10k Ohm resistor.</span></p>
+
+                    <h4>KiCAD libs:</h4>
+                    <ul>
+                        <li>
+                            <strong class="kicad-input-field-name">Footprint:</strong>
+                            <input type="text" class="kicad-input-field" id="footprint" value="link/to/footprint" readonly>
+                            <button onclick="editField('footprint')">Edit</button>
+                        </li>
+                            <li>
+                                <strong class="kicad-input-field-name">Symbol:</strong>
+                                <input type="text" class="kicad-input-field" id="symbol" value="link/to/symbol" readonly>
+                                <button onclick="editField('symbol')">Edit</button>
+                            </li>
+                    </ul>
+                </div>
+                <div class="image-and-model-container">
+                    <div class="component-image">
+                        <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
+                    </div>
+                    <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
+                        <!-- 3D viewer will be embedded here -->
+                        <p>3D model viewer will be embedded here.</p>
+                    </div>
                 </div>
             </div>
         </section>
