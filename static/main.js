@@ -23,3 +23,14 @@ initResize();
 initSearch();
 updateComponents(sortComponents(await fetchComponents()));
 displayComponents(null);
+
+function editField(fieldId) {
+    const inputField = document.getElementById(fieldId);
+    if (inputField.readOnly) {
+        inputField.readOnly = false; // Make the field editable
+        inputField.focus(); // Focus on the input field
+    } else {
+        inputField.readOnly = true; // Make the field read-only again
+        // Optionally, you can save the changes here
+    }
+}
