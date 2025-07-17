@@ -56,25 +56,27 @@ async function handleAddComponent(componentCategory) {
     addComponent(componentCategory, newComponent);
     displayComponents(null); // Refresh the component list
 
-    // try {
-    //     const response = await fetch('/api/components', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(data),
-    //     });
+    try {
+        const response = await fetch('/api/components', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newComponent),
+        });
 
-    //     if (!response.ok) {
-    //         throw new Error('Network response was not ok');
-    //     }
+        console.log(`Response: ${response}`);
 
-    //     const newComponent = await response.json();
-    //     console.log('Component added:', newComponent);
-    //     closeModal(); // Close the modal after adding the component
-    // } catch (error) {
-    //     console.error('Error adding component:', error);
-    // }
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+
+        // const newComponent = await response.json();
+        // console.log('Component added:', newComponent);
+        // closeModal(); // Close the modal after adding the component
+    } catch (error) {
+        console.error('Error adding component:', error);
+    }
     closeModal();
 }
 
@@ -94,14 +96,14 @@ export function openModal(componentCategory) {    // add-component-form-header
             break;
         case "capacitors":
             addComponentForm.appendChild(createForm("text", "Value:", "value"));
-            addComponentForm.appendChild(createForm("text", "Type:", "type"));
+            addComponentForm.appendChild(createForm("text", "Technology:", "technology"));
             addComponentForm.appendChild(createForm("text", "Voltage:", "voltage"));
             break;
         case "ics":
             addComponentForm.appendChild(createForm("text", "Name:", "name"));
             break;
         default:
-            alert(`Error: Unknown component type: ${componentCategory}!`);
+            alert(`Error: Unknown component category: ${componentCategory}!`);
     }
     addComponentForm.appendChild(createForm("text", "Case:", "case"));
 

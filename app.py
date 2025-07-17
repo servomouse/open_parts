@@ -63,6 +63,7 @@ def get_components():
 @app.route('/api/components', methods=['POST'])
 def add_component():
     data = request.json
+    print(f"Received new component data: {data}")
     new_component = Component(
         category=data['category'],
         name=data['name'],
@@ -79,7 +80,8 @@ def add_component():
     )
     db.session.add(new_component)
     db.session.commit()
-    return jsonify(new_component.to_dict()), 201
+    # return jsonify(new_component.to_dict()), 201
+    return "Component added"
 
 # Route to serve the main page
 @app.route('/')
