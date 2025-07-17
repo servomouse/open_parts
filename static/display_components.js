@@ -1,5 +1,5 @@
 import { openModal } from './modal.js';
-import { displayComponentDetails } from './component_details_panel.js';
+import { displayComponentDetails, fillComponentDetails } from './component_details_panel.js';
 import { getComponents } from './components.js';
 
 const fields = {
@@ -50,7 +50,7 @@ export function displayComponents(componentsDict) {
             tdAmount.textContent = component.amount || ''; // Display amount
             row.appendChild(tdAmount);
 
-            row.onclick = () => displayComponentDetails(category, index, component); // Add click event to row
+            row.onclick = () => fillComponentDetails(category, index, component); // Add click event to row
             table.appendChild(row);
         });
 
