@@ -1,5 +1,6 @@
-from flask import Flask, jsonify, request, render_template
+from flask import Flask, jsonify, request, send_file, render_template
 from flask_sqlalchemy import SQLAlchemy
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///components.db'
@@ -82,6 +83,45 @@ def add_component():
     db.session.commit()
     # return jsonify(new_component.to_dict()), 201
     return "Component added"
+
+# Example components_data dictionary
+components_data = {
+    "Resistor": {
+        "0603": "images/resistor_1w.jpg",
+    },
+}
+
+@app.route('/api/component_image', methods=['GET'])
+def get_component_image():
+    category = request.args.get('category')
+    case = request.args.get('case')
+
+    # Validate the inputs
+    if not category or not case:
+        return jsonify({"error": "Category and case are required."}), 400
+
+    # # Check if the category exists
+    # if category not in components_data:
+    #     return jsonify({"error": "Category not found."}), 404
+
+    # # Check if the case exists for the given category
+    # if case not in components_data[category]:
+    #     return jsonify({"error": "Case not found."}), 404
+
+    # # Get the image path
+    # image_path = components_data[category][case]
+
+    image_path = "images/resistor_1w.jpg"
+
+    # Check if the image path is a URL or a local file
+    if image_path.startswith('http://') or image_path.startswith('https://'):
+        return image_path  # Return the URL directly
+    else:
+        # Serve the local file
+        if os.path.exists(image_path):
+            return send_file(image_path)
+        else:
+            return jsonify({"error": "Image file not found."}), 404
 
 # Route to serve the main page
 @app.route('/')
