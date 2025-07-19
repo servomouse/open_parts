@@ -33,7 +33,7 @@
         <div id="resizer"></div>
 
         
-        <section id="component-details">
+        <!-- <section id="component-details">
             <h2>Component Details</h2>
             <div class="details-container">
                 <div class="component-info">
@@ -65,11 +65,84 @@
                         <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
                     </div>
                     <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
-                        <!-- 3D viewer will be embedded here -->
                         <p>3D model viewer will be embedded here.</p>
                     </div>
                 </div>
             </div>
+        </section> -->
+        <section id="component-details">
+            <section style="margin-bottom: 30px;">
+                <h2 style="color: #007bff;">Dashboard Overview</h2>
+                <div style="display: flex; justify-content: space-around;">
+                    <div style="text-align: center;">
+                        <h3>Total Components</h3>
+                        <p style="font-size: 24px; color: #007bff;">170</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h3>New Arrivals</h3>
+                        <p style="font-size: 24px; color: #007bff;">10</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <h3>Categories</h3>
+                        <p style="font-size: 24px; color: #007bff;">5</p>
+                    </div>
+                </div>
+            </section>
+
+            <section style="margin-bottom: 30px;">
+                <h2 style="color: #007bff;">Component Distribution</h2>
+                <div style="width: 100%; height: 40px; background-color: #e9ecef; display: flex; align-items: center;">
+                    <div style="width: 35%; height: 100%; background-color: #007bff;"></div>
+                    <div style="width: 23.5%; height: 100%; background-color: #28a745;"></div>
+                    <div style="width: 17.6%; height: 100%; background-color: #ffc107;"></div>
+                    <div style="width: 11.8%; height: 100%; background-color: #17a2b8;"></div>
+                    <div style="width: 5.9%; height: 100%; background-color: #dc3545;"></div>
+                    <div style="width: 5.9%; height: 100%; background-color: #6c757d;"></div>
+                </div>
+                <div style="margin-top: 10px;">
+                    <div style="display: flex; justify-content: space-around;">
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 20px; height: 20px; background-color: #007bff; margin-right: 5px;"></div>
+                            <span>Resistors (60)</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 20px; height: 20px; background-color: #28a745; margin-right: 5px;"></div>
+                            <span>Capacitors (40)</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 20px; height: 20px; background-color: #ffc107; margin-right: 5px;"></div>
+                            <span>ICs (30)</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 20px; height: 20px; background-color: #17a2b8; margin-right: 5px;"></div>
+                            <span>Transistors (20)</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 20px; height: 20px; background-color: #dc3545; margin-right: 5px;"></div>
+                            <span>LEDs (10)</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 20px; height: 20px; background-color: #6c757d; margin-right: 5px;"></div>
+                            <span>Others (10)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 style="color: #007bff;">Recent Activity</h2>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+                        <strong>New Component Added:</strong> Resistor 220Ω
+                    </li>
+                    <li style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+                        <strong>New Component Added:</strong> Capacitor 10µF
+                    </li>
+                    <li style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+                        <strong>Component Removed:</strong> LED Red
+                    </li>
+                </ul>
+            </section>
         </section>
     </main>
 
