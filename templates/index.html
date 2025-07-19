@@ -33,44 +33,46 @@
         <div id="resizer"></div>
 
         
-        <!-- <section id="component-details">
-            <h2>Component Details</h2>
-            <div class="details-container">
-                <div class="component-info">
-                    <h3 id="component-name">10k Ohm Resistor</h3>
-                    <p><strong>Category:</strong> <span id="component-category">Resistor</span></p>
-                    <p><strong>Value:</strong> <span id="component-value">10k</span></p>
-                    <p><strong>Precision:</strong> <span id="component-precision">1%</span></p>
-                    <p><strong>Case:</strong> <span id="component-case">0603</span></p>
-                    <p><strong>Technology:</strong> <span id="component-technology">Film</span></p>
-                    <p><strong>Amount Available:</strong> <span id="component-amount">10</span></p>
-                    <p><strong>Description:</strong> <span id="component-description">Standard 10k Ohm resistor.</span></p>
+<section id="component-details">
+    <h2>Component Details</h2>
+    <div class="details-container">
+        <div class="component-info">
+            <h3 id="component-name">10k Ohm Resistor</h3>
+            <p><strong>Category:</strong> <span id="component-category">Resistor</span></p>
+            <p><strong>Value:</strong> <span id="component-value">10k</span></p>
+            <p><strong>Precision:</strong> <span id="component-precision">1%</span></p>
+            <p><strong>Case:</strong> <span id="component-case">0603</span></p>
+            <p><strong>Technology:</strong> <span id="component-technology">Film</span></p>
+            <p><strong>Amount Available:</strong> <span id="component-amount">10</span></p>
+            <p><strong>Description:</strong> <span id="component-description">Standard 10k Ohm resistor.</span></p>
 
-                    <h4>KiCAD libs:</h4>
-                    <ul>
-                        <li>
-                            <strong class="kicad-input-field-name">Footprint:</strong>
-                            <input type="text" class="kicad-input-field" id="footprint" value="link/to/footprint" readonly>
-                            <button onclick="editField('footprint')">Edit</button>
-                        </li>
-                            <li>
-                                <strong class="kicad-input-field-name">Symbol:</strong>
-                                <input type="text" class="kicad-input-field" id="symbol" value="link/to/symbol" readonly>
-                                <button onclick="editField('symbol')">Edit</button>
-                            </li>
-                    </ul>
-                </div>
-                <div class="image-and-model-container">
-                    <div class="component-image">
-                        <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
-                    </div>
-                    <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
-                        <p>3D model viewer will be embedded here.</p>
-                    </div>
-                </div>
+            <h4>KiCAD libs:</h4>s1ski_Sisyuli
+            <ul>
+                <li>
+                    <strong class="kicad-input-field-name">Footprint:</strong>
+                    <input type="text" class="kicad-input-field" id="footprint" value="link/to/footprint" readonly>
+                    <button onclick="editField('footprint')">Edit</button>
+                </li>
+                    <li>
+                        <strong class="kicad-input-field-name">Symbol:</strong>
+                        <input type="text" class="kicad-input-field" id="symbol" value="link/to/symbol" readonly>
+                        <button onclick="editField('symbol')">Edit</button>
+                    </li>
+            </ul>
+        </div>
+        <div class="image-and-model-container">
+            <div class="component-image">
+                <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
             </div>
-        </section> -->
-        <section id="component-details">
+            <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
+                <model-viewer src="{{ url_for('static', filename='3d_models/octal_socket.glb') }}" alt="3D model of 10k Ohm Resistor" auto-rotate camera-controls style="width: 100%; height: 100%; background-color: #909090;">
+                </model-viewer>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <!-- <section id="component-details">
             <section style="margin-bottom: 30px;">
                 <h2 style="color: #007bff;">Dashboard Overview</h2>
                 <div style="display: flex; justify-content: space-around;">
@@ -143,7 +145,7 @@
                     </li>
                 </ul>
             </section>
-        </section>
+        </section> -->
     </main>
 
     <footer>
@@ -151,5 +153,6 @@
     </footer>
 
     <script type="module" src="{{ url_for('static', filename='main.js') }}"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </body>
 </html>

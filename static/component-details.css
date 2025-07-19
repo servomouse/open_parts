@@ -62,3 +62,63 @@
     padding: 5px 10px;
     cursor: pointer;
 }
+
+.storage-info {
+    flex: 1; /* Allow this section to take available space */
+    margin-right: 20px; /* Space between info and image/model */
+    max-width: 50%; /* Limit to 50% of the container */
+    overflow: auto; /* Handle overflow if text is too long */
+}
+
+.statistics {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out items evenly */
+    margin-bottom: 20px; /* Space between statistics and recent arrivals */
+}
+
+.statistic-item {
+    flex: 1; /* Allow each statistic item to grow equally */
+    text-align: center; /* Center text */
+    padding: 10px; /* Add padding for better spacing */
+    border: 1px solid #ccc; /* Add border for separation */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.recent-arrivals {
+    margin-top: 20px; /* Space above recent arrivals */
+}
+
+.recent-arrivals ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.recent-arrivals li {
+    margin: 5px 0; /* Space between list items */
+}
+
+.image-and-model-container {
+    flex: 1; /* Allow this column to grow */
+    max-width: 50%; /* Limit to 50% of the container */
+    display: flex; /* Use flexbox for images */
+    flex-direction: column; /* Stack images vertically */
+    justify-content: flex-start; /* Align images to the top */
+}
+
+.placeholder-image {
+    flex: 1; /* Allow the image container to grow equally */
+    display: flex; /* Use flexbox for image alignment */
+    justify-content: center; /* Center images horizontally */
+    align-items: center; /* Center images vertically */
+}
+
+.placeholder-image img {
+    max-width: 100%; /* Ensure images do not exceed their container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.placeholder-3d-model {
+    max-width: 100%; /* Ensure the 3D model container does not exceed its parent */
+    height: auto; /* Maintain aspect ratio */
+}
