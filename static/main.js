@@ -77,6 +77,23 @@ function toggleFields(editable) {
     }
 }
 
+function copyToClipboard(button) {
+    // Find the span element next to the button
+    const span = button.previousElementSibling;
+    
+    // Create a temporary input element to hold the text
+    const tempInput = document.createElement('input');
+    tempInput.value = span.innerText; // Set the input value to the span's text
+    document.body.appendChild(tempInput); // Append the input to the body
+    tempInput.select(); // Select the text
+    document.execCommand('copy'); // Copy the text to the clipboard
+    document.body.removeChild(tempInput); // Remove the temporary input
+
+    // Optionally, provide feedback to the user
+    alert('Copied: ' + span.innerText);
+}
+
 // Make functions visible from HTML
 window.toggleEdit = toggleEdit;
 window.editField = editField;
+window.copyToClipboard = copyToClipboard;

@@ -69,15 +69,19 @@
                 </li>
                 <li>
                     <strong class="component-info-field-name">KiCAD footprint:</strong>
-                    <input type="text" class="component-info-input-const" id="footprint" value="path/to/footprint" readonly>
+                    <span class="component-info-input-span">path/to/footprint</span>
+                    <span class="copy-symbol" onclick="copyToClipboard(this)" style="cursor: pointer; padding-left: 10px;">&#10064;</span>
+                    <span class="tooltip">Copy to clipboard</span>
                 </li>
                 <li>
                     <strong class="component-info-field-name">KiCAD symbol:</strong>
-                    <input type="text" class="component-info-input-const" id="symbol" value="path/to/symbol" readonly>
+                    <!-- <input type="text" class="component-info-input-const" id="symbol" value="path/to/symbol" readonly> -->
+                    <span class="component-info-input-span">path/to/symbol</span>
                 </li>
                 <li>
                     <strong class="component-info-field-name">3D model:</strong>
-                    <input type="text" class="component-info-input-const" id="symbol" value="path/to/3d_model" readonly>
+                    <!-- <input type="text" class="component-info-input-const" id="symbol" value="path/to/3d_model" readonly> -->
+                    <span class="component-info-input-span">path/to/3d_model</span>
                 </li>
             </ul>
             <button id="component-info-edit-button" onclick="toggleEdit()">Edit</button>
