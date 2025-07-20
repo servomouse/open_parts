@@ -44,7 +44,7 @@
     width: 100%; /* Ensure the list item takes full width */
 }
 
-.kicad-input-field-name {
+.component-info-field-name {
     margin-right: 10px; /* Add some space between the label and input */
 }
 
@@ -56,9 +56,11 @@
     box-sizing: border-box; /* Include padding and border in the element's total width */
 }
 
-.component-info button {
+#component-info-edit-button {
     flex-shrink: 0; /* Prevent the button from shrinking */
+    float: right;
     margin-left: 10px;
+    margin-right: 10px;
     padding: 5px 10px;
     cursor: pointer;
 }

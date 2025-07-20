@@ -24,13 +24,59 @@ initSearch();
 updateComponents(sortComponents(await fetchComponents()));
 displayComponents(null);
 
-function editField(fieldId) {
+function editField(fieldId) {   // Called from HTML
     const inputField = document.getElementById(fieldId);
     if (inputField.readOnly) {
         inputField.readOnly = false; // Make the field editable
         inputField.focus(); // Focus on the input field
     } else {
         inputField.readOnly = true; // Make the field read-only again
-        // Optionally, you can save the changes here
     }
 }
+
+function toggleEdit() {
+    const button = document.getElementById('component-info-edit-button');
+    if (button.innerText === 'Edit') {
+        button.innerText = 'Save';
+        toggleFields(true);
+    } else {
+        button.innerText = 'Edit';
+        toggleFields(false);
+    }
+}
+
+function toggleFields(editable) {
+    const fields = document.querySelectorAll('.component-info-input');
+    fields.forEach(field => {
+        field.readOnly = !editable; // Toggle readOnly attribute
+    });
+
+    if (editable) {
+        const spans = document.querySelectorAll('.component-info-input-span');
+        spans.forEach(span => {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = span.innerText; // Set the input value to the current text
+            input.className = 'component-info-input'; // Optional: add a class for styling
+            
+            // Replace the span with the input
+            span.parentNode.replaceChild(input, span);
+        });
+    } else {
+        const inputs = document.querySelectorAll('.component-info-input');
+        inputs.forEach(input => {
+        if (input) {
+            const newSpan = document.createElement('span');
+            newSpan.className = 'component-info-input-span'; // Optional: add the original class for styling
+            newSpan.innerText = input.value; // Save the value back to the new span
+            
+            // Replace the input with the new span
+            input.parentNode.replaceChild(newSpan, input);
+        }
+        });
+    }
+}
+
+// Make functions visible from HTML
+window.toggleEdit = toggleEdit;
+window.editField = editField;
