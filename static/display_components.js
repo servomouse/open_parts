@@ -67,6 +67,7 @@ export function displayComponents(componentsDict) {
         // Create the "Add" button
         const addButton = document.createElement('button');
         addButton.textContent = 'Add';
+        addButton.className = 'component-list-add-button';
         addButton.onclick = () => {
             openModal(category);
         };

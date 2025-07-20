@@ -59,6 +59,12 @@ function toggleFields(editable) {
             input.value = span.innerText; // Set the input value to the current text
             input.className = 'component-info-input'; // Optional: add a class for styling
             
+            // Remove the copy symbol
+            const copySymbol = span.nextElementSibling; // Get the copy symbol
+            if (copySymbol && copySymbol.classList.contains('copy-symbol')) {
+                copySymbol.remove(); // Remove the copy symbol
+            }
+            
             // Replace the span with the input
             span.parentNode.replaceChild(input, span);
         });
@@ -72,6 +78,18 @@ function toggleFields(editable) {
             
             // Replace the input with the new span
             input.parentNode.replaceChild(newSpan, input);
+
+            if (newSpan.parentNode.classList.contains('has-copy-symbol')) {
+                // Add the copy symbol back
+                const copySymbol = document.createElement('span');
+                copySymbol.className = 'copy-symbol';
+                copySymbol.onclick = function() { copyToClipboard(this); }; // Set the onclick event
+                copySymbol.title = "Copy to clipboard";
+                copySymbol.innerHTML = '&#10064;'; // Copy symbol character
+                
+                // Insert the copy symbol after the new span
+                newSpan.parentNode.insertBefore(copySymbol, newSpan.nextSibling);
+            }
         }
         });
     }
