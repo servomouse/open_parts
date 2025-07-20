@@ -5,6 +5,34 @@
     width: 100%; /* Ensure the container takes full width */
 }
 
+#component-details {
+    width: 55%;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+#component-image {
+    max-width: 100%;
+    height: auto;
+}
+
+#components section {
+    margin-bottom: 20px; /* Add space between sections */
+}
+
+#components h3 {
+    margin: 0; /* Remove default margin */
+}
+
+#component-info-edit-button {
+    margin-left: auto; /* Push the button to the right */
+    padding: 5px 10px; /* Add some padding for better appearance */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
 .component-info {
     flex: 1; /* Allow this section to take available space */
     margin-right: 20px; /* Space between info and image/model */
@@ -38,6 +66,7 @@
 }
 
 .component-info li {
+    position: relative;
     margin: 10px 0;
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Center items vertically */
@@ -48,6 +77,7 @@
     margin-right: 10px; /* Add some space between the label and input */
 }
 
+/* .component-info-input .component-info-input-const { */
 .component-info input[type="text"] {
     flex: 1; /* Allow the input field to grow and take available space */
     margin-right: 10px; /* Add some space between the input and button */
@@ -123,4 +153,17 @@
 .placeholder-3d-model {
     max-width: 100%; /* Ensure the 3D model container does not exceed its parent */
     height: auto; /* Maintain aspect ratio */
+}
+
+.component-info-input-span {
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.copy-symbol {
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+li.has-copy-symbol:hover:hover .component-info-input-span {
+    color: red; /* Change to your desired color */
 }

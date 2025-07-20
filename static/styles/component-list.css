@@ -1,23 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-}
-
-header {
-    background: #007BFF;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-main {
-    display: flex;
-    padding: 20px;
-    height: calc(100vh - 100px); /* Adjust height for header and footer */
-}
-
 #component-list {
     width: 40%;
     background: white;
@@ -32,22 +12,6 @@ main {
     padding: 10px;
     margin-top: 10px;
     box-sizing: border-box; /* Include padding in the width calculation */
-}
-
-#resizer {
-    width: 5px;
-    background: #007BFF;
-    cursor: ew-resize;
-    margin: 0 10px;
-}
-
-#component-details {
-    width: 55%;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    overflow-y: auto; /* Allow scrolling if content overflows */
 }
 
 table {
@@ -79,30 +43,8 @@ tr:hover {
     cursor: pointer; /* Change cursor to pointer */
 }
 
-#component-image {
-    max-width: 100%;
-    height: auto;
-}
-
-#components section {
-    margin-bottom: 20px; /* Add space between sections */
-}
-
-#components h3 {
-    margin: 0; /* Remove default margin */
-}
-
-button {
+.component-list-add-button {
     margin-left: auto; /* Push the button to the right */
     padding: 5px 10px; /* Add some padding for better appearance */
     cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-#3d-viewer {
-    width: 100%;
-    height: 300px;
-    background: #eaeaea;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }

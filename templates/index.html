@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OpenParts - Electronic Components Manager</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='component-details.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='modal-styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main-styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/component-list.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/info-panel.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/component-details.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/database-stats.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/modal-styles.css') }}">
 </head>
 <body>
     <header>
@@ -32,71 +35,74 @@
 
         <div id="resizer"></div>
 
-        
-<section id="component-details">
-    <h2>Component Details</h2>
-    <div class="details-container">
-        <div class="component-info">
-            <h3 id="component-name">10k Ohm Resistor</h3>
-            <ul>
-                <li>
-                    <strong class="component-info-field-name">Category:</strong>
-                    <span class="component-info-input-span">Resistor</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">Value:</strong>
-                     <span class="component-info-input-span">10k</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">Precision:</strong>
-                    <span class="component-info-input-span">1%</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">Package:</strong>
-                    <span class="component-info-input-span">0603</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">Technology:</strong>
-                    <span class="component-info-input-span">Film</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">Amount Available:</strong>
-                    <span class="component-info-input-span">10</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">Description:</strong>
-                    <span class="component-info-input-span">Standard 10k Ohm resistor.</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">KiCAD footprint:</strong>
-                    <span class="component-info-input-span">path/to/footprint</span>
-                    <span class="copy-symbol" onclick="copyToClipboard(this)" style="cursor: pointer; padding-left: 10px;">&#10064;</span>
-                    <span class="tooltip">Copy to clipboard</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">KiCAD symbol:</strong>
-                    <!-- <input type="text" class="component-info-input-const" id="symbol" value="path/to/symbol" readonly> -->
-                    <span class="component-info-input-span">path/to/symbol</span>
-                </li>
-                <li>
-                    <strong class="component-info-field-name">3D model:</strong>
-                    <!-- <input type="text" class="component-info-input-const" id="symbol" value="path/to/3d_model" readonly> -->
-                    <span class="component-info-input-span">path/to/3d_model</span>
-                </li>
-            </ul>
-            <button id="component-info-edit-button" onclick="toggleEdit()">Edit</button>
-        </div>
-        <div class="image-and-model-container">
-            <div class="component-image">
-                <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
+        <section id="component-details">
+            <div class="details-container">
+                <div class="component-info">
+                    <h2>Component Details</h2>
+                    <h3 id="component-name">10k Ohm Resistor</h3>
+                    <ul>
+                        <li>
+                            <strong class="component-info-field-name">Category:</strong>
+                            <span class="component-info-input-span">Resistor</span>
+                        </li>
+                        <li>
+                            <strong class="component-info-field-name">Value:</strong>
+                            <span class="component-info-input-span">10k</span>
+                        </li>
+                        <li>
+                            <strong class="component-info-field-name">Precision:</strong>
+                            <span class="component-info-input-span">1%</span>
+                        </li>
+                        <li>
+                            <strong class="component-info-field-name">Package:</strong>
+                            <span class="component-info-input-span">0603</span>
+                        </li>
+                        <li>
+                            <strong class="component-info-field-name">Technology:</strong>
+                            <span class="component-info-input-span">Film</span>
+                        </li>
+                        <li>
+                            <strong class="component-info-field-name">Amount Available:</strong>
+                            <span class="component-info-input-span">10</span>
+                        </li>
+                        <li>
+                            <strong class="component-info-field-name">Description:</strong>
+                            <span class="component-info-input-span">Standard 10k Ohm resistor.</span>
+                        </li>
+                        <li class="has-copy-symbol">
+                            <strong class="component-info-field-name">KiCAD footprint:</strong>
+                            <span class="component-info-input-span">path/to/footprint</span>
+                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                        </li>
+                        <li class="has-copy-symbol">
+                            <strong class="component-info-field-name">KiCAD symbol:</strong>
+                            <span class="component-info-input-span">path/to/symbol</span>
+                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                        </li>
+                        <li class="has-copy-symbol">
+                            <strong class="component-info-field-name">Image:</strong>
+                            <span class="component-info-input-span">path/to/image</span>
+                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                        </li>
+                        <li class="has-copy-symbol">
+                            <strong class="component-info-field-name">3D model:</strong>
+                            <span class="component-info-input-span">path/to/3d_model</span>
+                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                        </li>
+                    </ul>
+                    <button id="component-info-edit-button" onclick="toggleEdit()">Edit</button>
+                </div>
+                <div class="image-and-model-container">
+                    <div class="component-image">
+                        <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
+                    </div>
+                    <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
+                        <model-viewer src="{{ url_for('static', filename='3d_models/octal_socket.glb') }}" alt="3D model of 10k Ohm Resistor" auto-rotate camera-controls style="width: 100%; height: 100%; background-color: #909090;" exposure="0.5" >
+                        </model-viewer>
+                    </div>
+                </div>
             </div>
-            <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
-                <model-viewer src="{{ url_for('static', filename='3d_models/octal_socket.glb') }}" alt="3D model of 10k Ohm Resistor" auto-rotate camera-controls style="width: 100%; height: 100%; background-color: #909090;" exposure="0.5" >
-                </model-viewer>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- <section id="component-details">
             <section style="margin-bottom: 30px;">
