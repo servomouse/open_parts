@@ -10,7 +10,10 @@ export function initResize() {
 
 function resize(e) {
     const componentList = document.getElementById('component-list');
-    const componentDetails = document.getElementById('component-details');
+    let componentDetails = document.getElementById('component-details');
+    if(componentDetails === null) {
+        componentDetails = document.getElementById('dataset-stats-section');
+    }
     const newWidth = e.clientX - componentList.getBoundingClientRect().left;
     if (newWidth > 200 && newWidth < window.innerWidth - 300) { // Set min and max width
         componentList.style.width = newWidth + 'px';
