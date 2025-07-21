@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <main>
+    <main id="main">
         <section id="component-list">
             <h2>Available Components</h2>
             <input type="text" id="search-bar" placeholder="Search components...">
@@ -92,7 +92,7 @@
                 <button id="component-info-edit-button" onclick="toggleEdit()">Edit</button>
             </div>
             <div class="image-and-model-container">
-                <div class="component-image">
+                <div class="component-image-div">
                     <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
                 </div>
                 <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">

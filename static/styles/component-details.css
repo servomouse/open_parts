@@ -42,14 +42,14 @@
     justify-content: flex-start; /* Align images to the top */
 }
 
-.component-image  div {
+.component-image-div {
     flex: 1; /* Allow each image container to grow equally */
     display: flex; /* Use flexbox for image alignment */
     justify-content: center; /* Center images horizontally */
     align-items: center; /* Center images vertically */
 }
 
-.component-image img .component-3d-model {
+.component-image-div img .component-3d-model {
     max-width: 100%; /* Ensure images do not exceed their container */
     height: auto; /* Maintain aspect ratio */
 }
