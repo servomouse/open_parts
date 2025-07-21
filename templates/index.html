@@ -35,152 +35,120 @@
 
         <div id="resizer"></div>
 
-        <section id="component-details">
-            <div class="details-container">
-                <div class="component-info">
-                    <h2>Component Details</h2>
-                    <h3 id="component-name">10k Ohm Resistor</h3>
-                    <ul>
-                        <li>
-                            <strong class="component-info-field-name">Category:</strong>
-                            <span class="component-info-input-span">Resistor</span>
-                        </li>
-                        <li>
-                            <strong class="component-info-field-name">Value:</strong>
-                            <span class="component-info-input-span">10k</span>
-                        </li>
-                        <li>
-                            <strong class="component-info-field-name">Precision:</strong>
-                            <span class="component-info-input-span">1%</span>
-                        </li>
-                        <li>
-                            <strong class="component-info-field-name">Package:</strong>
-                            <span class="component-info-input-span">0603</span>
-                        </li>
-                        <li>
-                            <strong class="component-info-field-name">Technology:</strong>
-                            <span class="component-info-input-span">Film</span>
-                        </li>
-                        <li>
-                            <strong class="component-info-field-name">Amount Available:</strong>
-                            <span class="component-info-input-span">10</span>
-                        </li>
-                        <li>
-                            <strong class="component-info-field-name">Description:</strong>
-                            <span class="component-info-input-span">Standard 10k Ohm resistor.</span>
-                        </li>
-                        <li class="has-copy-symbol">
-                            <strong class="component-info-field-name">KiCAD footprint:</strong>
-                            <span class="component-info-input-span">path/to/footprint</span>
-                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
-                        </li>
-                        <li class="has-copy-symbol">
-                            <strong class="component-info-field-name">KiCAD symbol:</strong>
-                            <span class="component-info-input-span">path/to/symbol</span>
-                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
-                        </li>
-                        <li class="has-copy-symbol">
-                            <strong class="component-info-field-name">Image:</strong>
-                            <span class="component-info-input-span">path/to/image</span>
-                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
-                        </li>
-                        <li class="has-copy-symbol">
-                            <strong class="component-info-field-name">3D model:</strong>
-                            <span class="component-info-input-span">path/to/3d_model</span>
-                            <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
-                        </li>
-                    </ul>
-                    <button id="component-info-edit-button" onclick="toggleEdit()">Edit</button>
+        <!-- <section id="component-details">
+            <div class="component-info">
+                <h2>Component Details</h2>
+                <h3 id="component-name">10k Ohm Resistor</h3>
+                <ul>
+                    <li>
+                        <strong class="component-info-field-name">Category:</strong>
+                        <span class="component-info-input-span">Resistor</span>
+                    </li>
+                    <li>
+                        <strong class="component-info-field-name">Value:</strong>
+                        <span class="component-info-input-span">10k</span>
+                    </li>
+                    <li>
+                        <strong class="component-info-field-name">Precision:</strong>
+                        <span class="component-info-input-span">1%</span>
+                    </li>
+                    <li>
+                        <strong class="component-info-field-name">Package:</strong>
+                        <span class="component-info-input-span">0603</span>
+                    </li>
+                    <li>
+                        <strong class="component-info-field-name">Technology:</strong>
+                        <span class="component-info-input-span">Film</span>
+                    </li>
+                    <li>
+                        <strong class="component-info-field-name">Amount Available:</strong>
+                        <span class="component-info-input-span">10</span>
+                    </li>
+                    <li>
+                        <strong class="component-info-field-name">Description:</strong>
+                        <span class="component-info-input-span">Standard 10k Ohm resistor.</span>
+                    </li>
+                    <li class="has-copy-symbol">
+                        <strong class="component-info-field-name">KiCAD footprint:</strong>
+                        <span class="component-info-input-span">path/to/footprint</span>
+                        <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                    </li>
+                    <li class="has-copy-symbol">
+                        <strong class="component-info-field-name">KiCAD symbol:</strong>
+                        <span class="component-info-input-span">path/to/symbol</span>
+                        <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                    </li>
+                    <li class="has-copy-symbol">
+                        <strong class="component-info-field-name">Image:</strong>
+                        <span class="component-info-input-span">path/to/image</span>
+                        <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                    </li>
+                    <li class="has-copy-symbol">
+                        <strong class="component-info-field-name">3D model:</strong>
+                        <span class="component-info-input-span">path/to/3d_model</span>
+                        <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
+                    </li>
+                </ul>
+                <button id="component-info-edit-button" onclick="toggleEdit()">Edit</button>
+            </div>
+            <div class="image-and-model-container">
+                <div class="component-image">
+                    <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
                 </div>
-                <div class="image-and-model-container">
-                    <div class="component-image">
-                        <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
-                    </div>
-                    <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
-                        <model-viewer src="{{ url_for('static', filename='3d_models/octal_socket.glb') }}" alt="3D model of 10k Ohm Resistor" auto-rotate camera-controls style="width: 100%; height: 100%; background-color: #909090;" exposure="0.5" >
-                        </model-viewer>
-                    </div>
+                <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
+                    <model-viewer src="{{ url_for('static', filename='3d_models/octal_socket.glb') }}" alt="3D model of 10k Ohm Resistor" auto-rotate camera-controls style="width: 100%; height: 100%; background-color: #909090;" exposure="0.5" >
+                    </model-viewer>
                 </div>
             </div>
-        </section>
+        </section> -->
 
-        <!-- <section id="component-details">
+        <section id="dataset-stats-section">
             <section style="margin-bottom: 30px;">
                 <h2 style="color: #007bff;">Dashboard Overview</h2>
                 <div style="display: flex; justify-content: space-around;">
                     <div style="text-align: center;">
                         <h3>Total Components</h3>
-                        <p style="font-size: 24px; color: #007bff;">170</p>
+                        <p id="dataset-stats-total-components" style="font-size: 24px; color: #007bff;">170</p>
                     </div>
                     <div style="text-align: center;">
                         <h3>New Arrivals</h3>
-                        <p style="font-size: 24px; color: #007bff;">10</p>
+                        <p id="dataset-stats-new-arrivals" style="font-size: 24px; color: #007bff;">10</p>
                     </div>
                     <div style="text-align: center;">
                         <h3>Categories</h3>
-                        <p style="font-size: 24px; color: #007bff;">5</p>
+                        <p id="dataset-stats-num-categories" style="font-size: 24px; color: #007bff;">5</p>
                     </div>
                 </div>
             </section>
 
             <section style="margin-bottom: 30px;">
                 <h2 style="color: #007bff;">Component Distribution</h2>
-                <div style="width: 100%; height: 40px; background-color: #e9ecef; display: flex; align-items: center;">
-                    <div style="width: 35%; height: 100%; background-color: #007bff;"></div>
-                    <div style="width: 23.5%; height: 100%; background-color: #28a745;"></div>
-                    <div style="width: 17.6%; height: 100%; background-color: #ffc107;"></div>
-                    <div style="width: 11.8%; height: 100%; background-color: #17a2b8;"></div>
-                    <div style="width: 5.9%; height: 100%; background-color: #dc3545;"></div>
-                    <div style="width: 5.9%; height: 100%; background-color: #6c757d;"></div>
+                <div class="dataset-stats-bar-chart" id="dataset-stats-bar-chart">
                 </div>
-                <div style="margin-top: 10px;">
-                    <div style="display: flex; justify-content: space-around;">
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 20px; height: 20px; background-color: #007bff; margin-right: 5px;"></div>
-                            <span>Resistors (60)</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 20px; height: 20px; background-color: #28a745; margin-right: 5px;"></div>
-                            <span>Capacitors (40)</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 20px; height: 20px; background-color: #ffc107; margin-right: 5px;"></div>
-                            <span>ICs (30)</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 20px; height: 20px; background-color: #17a2b8; margin-right: 5px;"></div>
-                            <span>Transistors (20)</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 20px; height: 20px; background-color: #dc3545; margin-right: 5px;"></div>
-                            <span>LEDs (10)</span>
-                        </div>
-                        <div style="display: flex; align-items: center;">
-                            <div style="width: 20px; height: 20px; background-color: #6c757d; margin-right: 5px;"></div>
-                            <span>Others (10)</span>
-                        </div>
+                <div class="dataset-stats-bar-chart-legend">
+                    <div class="dataset-stats-bar-chart-legend-list" id="dataset-stats-bar-chart-legend-list">
                     </div>
                 </div>
             </section>
 
             <section>
                 <h2 style="color: #007bff;">Recent Activity</h2>
-                <ul style="list-style-type: none; padding: 0;">
-                    <li style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+                <ul class="dataset-stats-recent-activity-list">
+                    <li class="dataset-stats-recent-activity-item">
                         <strong>New Component Added:</strong> Resistor 220Ω
                     </li>
-                    <li style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+                    <li class="dataset-stats-recent-activity-item">
                         <strong>New Component Added:</strong> Capacitor 10µF
                     </li>
-                    <li style="padding: 10px; border-bottom: 1px solid #dee2e6;">
+                    <li class="dataset-stats-recent-activity-item">
                         <strong>Component Removed:</strong> LED Red
                     </li>
                 </ul>
             </section>
-        </section> -->
+        </section>
     </main>
 
-    <footer>
+    <footer style="display:flex; align-items: center; justify-content: space-around">
         <p>&copy; 2025 OpenParts</p>
     </footer>
 

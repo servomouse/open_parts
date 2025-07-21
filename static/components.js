@@ -19,3 +19,15 @@ export function addComponent(category, description) {
 export function getComponents() {
     return components;
 }
+
+export function getComponentsStats() {
+    let componentsStats = {
+        resistors:60,
+        capacitors: 40,
+        ICs: 30,
+        transistors: 20,
+        LEDs: 10,
+        others: 10
+    }
+    return componentsStats;
+}

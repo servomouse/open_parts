@@ -1,12 +1,6 @@
-.details-container {
-    display: flex;
-    /* align-items: stretch; Stretch items to match the height of the tallest item */
-    margin-bottom: 20px; /* Space between details and other sections */
-    width: 100%; /* Ensure the container takes full width */
-}
-
 #component-details {
     width: 55%;
+    display: flex;
     background: white;
     padding: 20px;
     border-radius: 5px;
