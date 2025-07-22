@@ -61,6 +61,7 @@ export function displayComponents(componentsDict) {
         headerDiv.style.display = 'flex'; // Use flexbox for alignment
         headerDiv.style.justifyContent = 'space-between'; // Space between title and button
         headerDiv.style.width = 'calc(100% - 20px)';
+        // headerDiv.style.marginBottom = '20px';
 
         const sectionHeader = document.createElement('h3');
         sectionHeader.textContent = category.charAt(0).toUpperCase() + category.slice(1); // Capitalize category
