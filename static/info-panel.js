@@ -87,8 +87,8 @@ export function showComponentInfo(category, index, component) {
     if(oldInfoPanel === null) {
         oldInfoPanel = document.getElementById('dataset-stats-section');
     }
-    const infoPanel = document.createElement('section');
-    infoPanel.id = 'component-details';
+    const newSection = document.createElement('section');
+    newSection.id = 'component-details';
 
     // Component info:
     const componentInfoDiv = document.createElement('div');
@@ -103,8 +103,9 @@ export function showComponentInfo(category, index, component) {
         componentInfoDiv.appendChild(componentName);
 
         const componentInfoTable = document.createElement('ul');
-            const componentInfoTableItem = document.createElement('li');
-            for (const parameter in componentData) {
+
+        for (const parameter in componentData) {
+                const componentInfoTableItem = document.createElement('li');
                 if(hasCopySymbolFields.includes(parameter)) {
                     componentInfoTableItem.className = 'has-copy-symbol';
                 }
@@ -113,17 +114,26 @@ export function showComponentInfo(category, index, component) {
                 componentInfoTableItemStrong.innerText = `${parameter}`;
                 componentInfoTableItem.appendChild(componentInfoTableItemStrong);
 
-                const componentInfoTableItemSpan = document.createElement('strong');
+                const componentInfoTableItemSpan = document.createElement('span');
                 componentInfoTableItemSpan.className = 'component-info-input-span';
                 componentInfoTableItemSpan.innerText = `${componentData[parameter]}`;
-
                 componentInfoTableItem.appendChild(componentInfoTableItemSpan);
+
+                if(hasCopySymbolFields.includes(parameter)) {
+                    const copySymbolSpan = document.createElement('span');
+                    copySymbolSpan.className = 'copy-symbol';
+                    copySymbolSpan.title = 'Copy to clipboard';
+                    copySymbolSpan.innerHTML = '&#10064;';
+                    copySymbolSpan.onclick = function() { copyToClipboard(this); };
+                    componentInfoTableItem.appendChild(copySymbolSpan);
+                }
+
+                componentInfoTable.appendChild(componentInfoTableItem);
             }
 
-            componentInfoTable.appendChild(componentInfoTableItem);
         componentInfoDiv.appendChild(componentInfoTable);
 
-    infoPanel.appendChild(componentInfoDiv);
+    newSection.appendChild(componentInfoDiv);
 
     // Image and 3D model:
     const imageModelContainer = document.createElement('div');
@@ -133,6 +143,7 @@ export function showComponentInfo(category, index, component) {
         componentImageDiv.className = 'component-image-div';
             const componentImage = document.createElement('img');
             componentImage.src = componentData["image"];
+            componentImage.className = 'component-image';
             componentImage.alt = '10k Ohm Resistor';    // TODO: UpdateMe!
             // componentImage.id = 'newImageId';
             componentImageDiv.appendChild(componentImage);
@@ -149,7 +160,9 @@ export function showComponentInfo(category, index, component) {
             componentModelDiv.appendChild(modelViewer);
         imageModelContainer.appendChild(componentModelDiv);
 
-    infoPanel.appendChild(imageModelContainer);
+    newSection.appendChild(imageModelContainer);
 
-    oldInfoPanel.parentNode.replaceChild(infoPanel, oldInfoPanel);
+    oldInfoPanel.parentNode.replaceChild(newSection, oldInfoPanel);
+    // Force reflow
+    newSection.offsetHeight; // Accessing this property forces a reflow
 }

@@ -49,9 +49,23 @@
     align-items: center; /* Center images vertically */
 }
 
-.component-image-div img .component-3d-model {
-    max-width: 100%; /* Ensure images do not exceed their container */
-    height: auto; /* Maintain aspect ratio */
+/* .component-image-div img .component-3d-model {
+    max-width: 100%;
+    height: auto;
+} */
+
+.component-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.component-3d-model {
+    max-width: 100%;
+    height: auto;
+    flex: 1; /* Allow each image container to grow equally */
+    display: flex; /* Use flexbox for image alignment */
+    justify-content: center; /* Center images horizontally */
+    align-items: center; /* Center images vertically */
 }
 
 .component-info ul {
@@ -122,14 +136,6 @@
 
 .recent-arrivals li {
     margin: 5px 0; /* Space between list items */
-}
-
-.image-and-model-container {
-    flex: 1; /* Allow this column to grow */
-    max-width: 50%; /* Limit to 50% of the container */
-    display: flex; /* Use flexbox for images */
-    flex-direction: column; /* Stack images vertically */
-    justify-content: flex-start; /* Align images to the top */
 }
 
 .placeholder-image {

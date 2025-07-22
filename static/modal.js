@@ -137,4 +137,4 @@ function closeModal() {
 }
 
 // Event listener for the close button
-document.getElementById('close-modal').addEventListener('click', closeModal);
+// document.getElementById('close-modal').addEventListener('click', closeModal);

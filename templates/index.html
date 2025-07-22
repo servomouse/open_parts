@@ -16,13 +16,13 @@
         <h1>OpenParts - Electronic Components Manager</h1>
     </header>
     <!-- Modal Structure -->
-    <div id="add-component-modal" class="modal">
+    <!-- <div id="add-component-modal" class="modal">
         <div class="modal-content">
             <span class="close-button" id="close-modal">&times;</span>
             <h2 id="add-component-form-header">Add New Component</h2>
             <form id="add-component-form"></form>
         </div>
-    </div>
+    </div> -->
 
     <main id="main">
         <section id="component-list">
@@ -93,7 +93,7 @@
             </div>
             <div class="image-and-model-container">
                 <div class="component-image-div">
-                    <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image">
+                    <img src="{{ url_for('static', filename='images/resistor_1w.jpg') }}" alt="10k Ohm Resistor" id="component-image" class="component-image">
                 </div>
                 <div class="component-3d-model" id="component-3d-model" style="border: 1px solid #ccc; padding: 10px; height: 200px;">
                     <model-viewer src="{{ url_for('static', filename='3d_models/octal_socket.glb') }}" alt="3D model of 10k Ohm Resistor" auto-rotate camera-controls style="width: 100%; height: 100%; background-color: #909090;" exposure="0.5" >
@@ -148,7 +148,7 @@
         </section>
     </main>
 
-    <footer style="display:flex; align-items: center; justify-content: space-around">
+    <footer>
         <p>&copy; 2025 OpenParts</p>
     </footer>
 
