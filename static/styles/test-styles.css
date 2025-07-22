@@ -1,0 +1,149 @@
+html, body {
+    height: 100%;
+    margin: 0; /* Remove default margin */
+}
+
+body {
+    display: flex;
+    flex-direction: column; /* Stack header, main, and footer vertically */
+}
+
+header {
+    background: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+main {
+    flex: 1; /* Allow main to grow and fill available space */
+    display: flex; /* Use flexbox for layout */
+}
+
+#left-section, #right-section {
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    padding: 10px; /* Optional: Add some padding */
+}
+
+#left-section {
+    width: 40%;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+#right-section {
+    flex: 1; /* Allow right section to take remaining space */
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+#resizer {
+    width: 5px;
+    background: #007BFF;
+    cursor: ew-resize;
+    margin: 0 10px;
+}
+
+footer {
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px; /* Optional: Add some padding */
+    background-color: #f8f8f8; /* Optional: Background color for footer */
+}
+
+/* Components-list */
+
+
+#search-bar {
+    width: calc(100% - 20px); /* Adjust for padding/margin */
+    padding: 10px;
+    margin-top: 10px;
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+table {
+    width: calc(100% - 20px); /* Ensure the table takes full width */
+    border-collapse: collapse; /* Optional: for better styling */
+    margin-top: 10px; /* Space between sections */
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd; /* Optional: add border to cells */
+}
+
+th {
+    background-color: #f2f2f2; /* Light gray background for headers */
+}
+
+tr:nth-child(even) {
+    background-color: lightblue; /* Light blue for even rows */
+}
+
+tr:nth-child(odd) {
+    background-color: lightgreen; /* Light green for odd rows */
+}
+
+tr:hover {
+    background-color: rgb(233, 219, 144); /* Change the color on hover */
+    cursor: pointer; /* Change cursor to pointer */
+}
+
+.component-list-add-button {
+    margin-left: auto; /* Push the button to the right */
+    padding: 5px 10px; /* Add some padding for better appearance */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+/* Database stats panel */
+
+.dataset-stats-bar-chart {
+    width: 100%;
+    height: 40px;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+}
+
+.dataset-stats-bar-chart-legend {
+    margin-top: 10px;
+}
+
+.dataset-stats-bar-chart-legend-list {
+    display: flex;
+    justify-content: space-around;
+}
+
+.dataset-stats-bar-chart-legend-list-item {
+    display: flex;
+    align-items: center;
+}
+
+.dataset-stats-bar-chart-legend-list-item span {
+    text-transform: capitalize;
+}
+
+.dataset-stats-bar-chart-legend-list-item-square {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.dataset-stats-recent-activity-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dataset-stats-recent-activity-item {
+    padding: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
