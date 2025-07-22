@@ -156,3 +156,161 @@ tr:hover {
     padding: 10px;
     border-bottom: 1px solid #dee2e6;
 }
+
+/* Component details */
+#component-details {
+    display: flex;
+    flex: 1; /* Allow right section to take remaining space */
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+#component-image {
+    max-width: 100%;
+    height: auto;
+}
+
+#components section {
+    margin-bottom: 20px; /* Add space between sections */
+}
+
+#components h3 {
+    margin: 0; /* Remove default margin */
+}
+
+#component-info-edit-button {
+    margin-left: auto; /* Push the button to the right */
+    padding: 5px 10px; /* Add some padding for better appearance */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.component-info {
+    flex: 1; /* Allow this section to take available space */
+    margin-right: 20px; /* Space between info and image/model */
+    max-width: 50%; /* Limit to 50% of the container */
+    overflow: auto; /* Handle overflow if text is too long */
+}
+
+.image-and-model-container {
+    flex: 1; /* Allow this column to grow */
+    max-width: 50%; /* Limit to 50% of the container */
+    display: flex; /* Use flexbox for images */
+    flex-direction: column; /* Stack images vertically */
+    justify-content: flex-start; /* Align images to the top */
+}
+
+.component-image-div {
+    flex: 1; /* Allow each image container to grow equally */
+    display: flex; /* Use flexbox for image alignment */
+    justify-content: center; /* Center images horizontally */
+    align-items: center; /* Center images vertically */
+}
+
+/* .component-image-div img .component-3d-model {
+    max-width: 100%;
+    height: auto;
+} */
+
+.component-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.component-3d-model {
+    max-width: 100%;
+    height: auto;
+    flex: 1; /* Allow each image container to grow equally */
+    display: flex; /* Use flexbox for image alignment */
+    justify-content: center; /* Center images horizontally */
+    align-items: center; /* Center images vertically */
+}
+
+.component-info ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.component-info li {
+    position: relative;
+    margin: 10px 0;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    width: 100%; /* Ensure the list item takes full width */
+}
+
+.component-info-field-name {
+    margin-right: 10px; /* Add some space between the label and input */
+}
+
+/* .component-info-input .component-info-input-const { */
+.component-info input[type="text"] {
+    flex: 1; /* Allow the input field to grow and take available space */
+    margin-right: 10px; /* Add some space between the input and button */
+    margin-left: 10px;
+    padding: 5px;
+    box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+#component-info-edit-button {
+    flex-shrink: 0; /* Prevent the button from shrinking */
+    float: right;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.storage-info {
+    flex: 1; /* Allow this section to take available space */
+    margin-right: 20px; /* Space between info and image/model */
+    max-width: 50%; /* Limit to 50% of the container */
+    overflow: auto; /* Handle overflow if text is too long */
+}
+
+.statistics {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out items evenly */
+    margin-bottom: 20px; /* Space between statistics and recent arrivals */
+}
+
+.statistic-item {
+    flex: 1; /* Allow each statistic item to grow equally */
+    text-align: center; /* Center text */
+    padding: 10px; /* Add padding for better spacing */
+    border: 1px solid #ccc; /* Add border for separation */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #f9f9f9; /* Light background for contrast */
+}
+
+.recent-arrivals {
+    margin-top: 20px; /* Space above recent arrivals */
+}
+
+.recent-arrivals ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+}
+
+.recent-arrivals li {
+    margin: 5px 0; /* Space between list items */
+}
+
+.component-info-input-span {
+    transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.copy-symbol {
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+li.has-copy-symbol:hover:hover .component-info-input-span {
+    color: red; /* Change to your desired color */
+}
+
+.component-info-field-name {
+    text-transform: capitalize;
+}
