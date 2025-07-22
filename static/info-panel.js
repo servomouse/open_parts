@@ -38,7 +38,7 @@
     //             <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
     //         </li>
     //         <li class="has-copy-symbol">
-    //             <strong class="component-info-field-name">KiCAD symbol:</strong>
+    //             <strong class="component-info-field-name">KiCAD symbol:</strong> 
     //             <span class="component-info-input-span">path/to/symbol</span>
     //             <span class="copy-symbol" onclick="copyToClipboard(this)" title="Copy to clipboard">&#10064;</span>
     //         </li>
@@ -66,12 +66,29 @@
     // </div>
 // </section>
 
-export function showComponentInfo(component) {
+export function showComponentInfo(category, index, component) {
+    const componentData = {
+        "category": "Resistor",
+        "value": "10k",
+        "precision": "1%",
+        "package": "0603",
+        "technology": "Film",
+        "amount available": 10,
+        "description": "Standard 10k Ohm resistor.",
+        "KiCAD footprint": "path/to/footprint",
+        "KiCAD symbol": "path/to/symbol",
+        "image": "static/images/resistor_1w.jpg",
+        "3D model": "static/3d_models/octal_socket.glb"
+    }
+    const hasCopySymbolFields = ["KiCAD footprint", "KiCAD symbol", "3D model"];
+    const baseUrl = "{{ url_for('static', filename='') }}";
+
     let oldInfoPanel = document.getElementById('component-details');
     if(oldInfoPanel === null) {
         oldInfoPanel = document.getElementById('dataset-stats-section');
     }
     const infoPanel = document.createElement('section');
+    infoPanel.id = 'component-details';
 
     // Component info:
     const componentInfoDiv = document.createElement('div');
@@ -87,16 +104,21 @@ export function showComponentInfo(component) {
 
         const componentInfoTable = document.createElement('ul');
             const componentInfoTableItem = document.createElement('li');
-
+            for (const parameter in componentData) {
+                if(hasCopySymbolFields.includes(parameter)) {
+                    componentInfoTableItem.className = 'has-copy-symbol';
+                }
                 const componentInfoTableItemStrong = document.createElement('strong');
                 componentInfoTableItemStrong.className = 'component-info-field-name';
-                componentInfoTableItemStrong.innerText = "Category:";   // TODO: UpdateMe!
+                componentInfoTableItemStrong.innerText = `${parameter}`;
                 componentInfoTableItem.appendChild(componentInfoTableItemStrong);
 
                 const componentInfoTableItemSpan = document.createElement('strong');
                 componentInfoTableItemSpan.className = 'component-info-input-span';
-                componentInfoTableItemSpan.innerText = "Resistor";   // TODO: UpdateMe!
+                componentInfoTableItemSpan.innerText = `${componentData[parameter]}`;
+
                 componentInfoTableItem.appendChild(componentInfoTableItemSpan);
+            }
 
             componentInfoTable.appendChild(componentInfoTableItem);
         componentInfoDiv.appendChild(componentInfoTable);
@@ -110,16 +132,16 @@ export function showComponentInfo(component) {
         const componentImageDiv = document.createElement('div');
         componentImageDiv.className = 'component-image-div';
             const componentImage = document.createElement('img');
-            componentImage.src = "{{ url_for('static', filename='images/resistor_1w.jpg') }}";
+            componentImage.src = componentData["image"];
             componentImage.alt = '10k Ohm Resistor';    // TODO: UpdateMe!
-            componentImage.id = 'newImageId';
+            // componentImage.id = 'newImageId';
             componentImageDiv.appendChild(componentImage);
         imageModelContainer.appendChild(componentImageDiv);
 
         const componentModelDiv = document.createElement('div');
-        componentModelDiv.className = 'component-image-div';
+        componentModelDiv.className = 'component-3d-model';
             const modelViewer = document.createElement('model-viewer');
-            modelViewer.setAttribute('src', "{{ url_for('static', filename='3d_models/octal_socket.glb') }}");
+            modelViewer.setAttribute('src', componentData["3D model"]);
             modelViewer.setAttribute('alt', "3D model of 10k Ohm Resistor");
             modelViewer.setAttribute('auto-rotate', '');
             modelViewer.setAttribute('camera-controls', '');

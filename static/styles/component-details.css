@@ -161,3 +161,7 @@
 li.has-copy-symbol:hover:hover .component-info-input-span {
     color: red; /* Change to your desired color */
 }
+
+.component-info-field-name {
+    text-transform: capitalize;
+}
