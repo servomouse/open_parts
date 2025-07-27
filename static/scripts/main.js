@@ -50,8 +50,9 @@ async function fetchComponents() {
     }
 }
 
-
-updateComponents(sortComponents(await fetchComponents()));
+let comps = await fetchComponents();
+console.log(`Received components: ${comps}`);
+updateComponents(sortComponents(comps));
 displayComponents(null);
 
 // Dataset stats panel:

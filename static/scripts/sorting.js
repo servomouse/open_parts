@@ -30,7 +30,7 @@ function sortResistors(resistors) {
         }
 
         // If values are the same, compare by case
-        return a.case.localeCompare(b.case);
+        return a.package.localeCompare(b.package);
     });
 }
 
@@ -71,7 +71,7 @@ function sortCapacitors(capacitors) {
         }
 
         // If voltages are the same, compare by case
-        return a.case.localeCompare(b.case);
+        return a.package.localeCompare(b.package);
     });
 }
 
@@ -84,7 +84,7 @@ function sortICs(ics) {
         }
 
         // If names are the same, compare by case
-        return a.case.localeCompare(b.case);
+        return a.package.localeCompare(b.package);
     });
 }
 
@@ -97,9 +97,9 @@ export function sortComponents(components) {
     // Sort categories alphabetically
     const sortedCategories = Object.keys(components).sort();
     const sortFunctions = {
-        "resistors": sortResistors,
-        "capacitors": sortCapacitors,
-        "ics": sortICs,
+        "Resistors": sortResistors,
+        "Capacitors": sortCapacitors,
+        "ICs": sortICs,
     }
 
     const sortedComponents = {};

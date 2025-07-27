@@ -4,9 +4,9 @@ import { showComponentInfo } from './component-info-panel.js';
 import { getComponents } from './components.js';
 
 const fields = {
-    resistors: ["value", "case", "precision", "description"],
-    capacitors: ["value", "case", "voltage", "technology", "description"],
-    ics: ["name", "case", "description"],
+    Resistors: ["value", "case", "precision", "description"],
+    Capacitors: ["value", "case", "voltage", "technology", "description"],
+    ICs: ["name", "case", "description"],
 };
 
 export function displayComponents(componentsDict) {
