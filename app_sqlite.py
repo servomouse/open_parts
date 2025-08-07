@@ -25,11 +25,19 @@ def get_components():
     return data
 
 # API endpoint to add a new component
-@app.route('/api/components', methods=['POST'])
+@app.route('/api/add_component', methods=['POST'])
 def add_component():
     data = request.json
     print(f"Received new component data: {data}")
     db.add_component(data)
+    return "Component added"
+
+# API endpoint to add a new component
+@app.route('/api/update_component', methods=['POST'])
+def update_component():
+    data = request.json
+    print(f"Received new component data: {data}")
+    db.edit_component(data)
     return "Component added"
 
 

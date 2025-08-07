@@ -4,9 +4,9 @@ import { showComponentInfo } from './component-info-panel.js';
 import { getComponents } from './components.js';
 
 const fields = {
-    Resistors: ["value", "case", "precision", "description"],
-    Capacitors: ["value", "case", "voltage", "technology", "description"],
-    ICs: ["name", "case", "description"],
+    Resistors: ["value", "package", "precision", "description"],
+    Capacitors: ["value", "package", "voltage", "technology", "description"],
+    ICs: ["name", "package", "description"],
 };
 
 export function displayComponents(componentsDict) {
@@ -51,7 +51,7 @@ export function displayComponents(componentsDict) {
             tdAmount.textContent = component.amount || ''; // Display amount
             row.appendChild(tdAmount);
 
-            row.onclick = () => showComponentInfo(category, index, component); // Add click event to row
+            row.onclick = () => showComponentInfo(component); // Add click event to row
             table.appendChild(row);
         });
 

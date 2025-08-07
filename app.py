@@ -126,7 +126,7 @@ def get_component_image():
 # Route to serve the main page
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_test.html')
 
 # Function to populate the database with initial component data
 def populate_database():

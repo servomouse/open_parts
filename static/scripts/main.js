@@ -1,6 +1,7 @@
 import { updateComponents, getComponentsStats } from './components.js';
 import { displayComponents } from './display_components.js';
 import { sortComponents } from './sorting.js';
+import { fetchComponents, upate_component } from './network.js';
 
 function initResize() {
     const resizer = document.getElementById('resizer');
@@ -35,24 +36,10 @@ initResize();
 
 
 
-// Function to fetch components from the backend
-async function fetchComponents() {
-    try {
-        const response = await fetch('/api/components');
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-        // displayComponents(components);
-    } catch (error) {
-        console.error('Error fetching components:', error);
-        return {};
-    }
-}
 
-let comps = await fetchComponents();
-console.log(`Received components: ${comps}`);
-updateComponents(sortComponents(comps));
+// let comps = await fetchComponents();
+// console.log(`Received components: ${comps}`);
+updateComponents(sortComponents(await fetchComponents()));
 displayComponents(null);
 
 // Dataset stats panel:

@@ -181,12 +181,6 @@ tr:hover {
     margin: 0; /* Remove default margin */
 }
 
-#component-info-edit-button {
-    margin-left: auto; /* Push the button to the right */
-    padding: 5px 10px; /* Add some padding for better appearance */
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-
 .component-info {
     flex: 1; /* Allow this section to take available space */
     margin-right: 20px; /* Space between info and image/model */
@@ -200,6 +194,8 @@ tr:hover {
     display: flex; /* Use flexbox for images */
     flex-direction: column; /* Stack images vertically */
     justify-content: flex-start; /* Align images to the top */
+    /* border: 2px solid gray; */
+    border-left: 2px solid gray;
 }
 
 .component-image-div {
@@ -208,11 +204,6 @@ tr:hover {
     justify-content: center; /* Center images horizontally */
     align-items: center; /* Center images vertically */
 }
-
-/* .component-image-div img .component-3d-model {
-    max-width: 100%;
-    height: auto;
-} */
 
 .component-image {
     max-width: 100%;
