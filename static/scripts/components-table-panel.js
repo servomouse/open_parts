@@ -1,5 +1,3 @@
-// import { openModal } from './modal.js';
-// import { displayComponentDetails, fillComponentDetails } from './component_details_panel.js';
 import { showComponentInfo } from './component-info-panel.js';
 import { getComponents } from './components.js';
 

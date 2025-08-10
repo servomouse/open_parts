@@ -1,5 +1,5 @@
 import { updateComponents, getComponentsStats } from './components.js';
-import { displayComponents } from './display_components.js';
+import { displayComponents } from './components-table-panel.js';
 import { sortComponents } from './sorting.js';
 import { fetchComponents, upate_component } from './network.js';
 
@@ -16,9 +16,6 @@ function initResize() {
 function resize(e) {
     const componentList = document.getElementById('left-section');
     let componentDetails = document.getElementById('right-section');
-    // if(componentDetails === null) {
-    //     componentDetails = document.getElementById('dataset-stats-section');
-    // }
     const newWidth = e.clientX - componentList.getBoundingClientRect().left;
     if (newWidth > 200 && newWidth < window.innerWidth - 300) { // Set min and max width
         componentList.style.width = newWidth + 'px';
@@ -34,15 +31,8 @@ function stopResize() {
 initResize();
 // initSearch();
 
-
-
-
-// let comps = await fetchComponents();
-// console.log(`Received components: ${comps}`);
 updateComponents(sortComponents(await fetchComponents()));
 displayComponents(null);
-
-// Dataset stats panel:
 
 const barChartColors = [
     "#007bff", "#28a745", "#ffc107", "#17a2b8", "#dc3545", "#6c757d"

@@ -1,24 +1,20 @@
 import { fetchComponents, upate_component } from './network.js';
-import { updateComponents, getComponentsStats } from './components.js';
+import { updateComponents } from './components.js';
 import { sortComponents } from './sorting.js';
-import { displayComponents } from './display_components.js';
+import { displayComponents } from './components-table-panel.js';
 
 let currentComponentId = 0;
 let currentComponent = null;
 
 function copyToClipboard(button) {
-    // Find the span element next to the button
     const span = button.previousElementSibling;
-    
-    // Create a temporary input element to hold the text
     const tempInput = document.createElement('input');
-    tempInput.value = span.innerText; // Set the input value to the span's text
-    document.body.appendChild(tempInput); // Append the input to the body
-    tempInput.select(); // Select the text
-    document.execCommand('copy'); // Copy the text to the clipboard
-    document.body.removeChild(tempInput); // Remove the temporary input
+    tempInput.value = span.innerText;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
 
-    // Optionally, provide feedback to the user
     alert('Copied: ' + span.innerText);
 }
 
@@ -36,25 +32,23 @@ async function toggleFields(editable) {
             input.value = span.innerText; // Set the input value to the current text
             input.className = 'component-info-input';
             input.id = span.id;
-            // console.log(`Span -> input id: ${input.id}`);
             
             // Remove the copy symbol
-            const copySymbol = span.nextElementSibling; // Get the copy symbol
+            const copySymbol = span.nextElementSibling;
             if (copySymbol && copySymbol.classList.contains('copy-symbol')) {
-                copySymbol.remove(); // Remove the copy symbol
+                copySymbol.remove();
             }
             
             // Replace the span with the input
             span.parentNode.replaceChild(input, span);
         });
     } else {
-        // let updatedData = {};
         const inputs = document.querySelectorAll('.component-info-input');
         inputs.forEach(input => {
         if (input) {
             const newSpan = document.createElement('span');
-            newSpan.className = 'component-info-input-span'; // Optional: add the original class for styling
-            newSpan.innerText = input.value; // Save the value back to the new span
+            newSpan.className = 'component-info-input-span';
+            newSpan.innerText = input.value;
             newSpan.id = input.id;
             const key = newSpan.id.replace("component-info-input-", "");
             currentComponent[key] = newSpan.innerText;
@@ -66,17 +60,15 @@ async function toggleFields(editable) {
                 // Add the copy symbol back
                 const copySymbol = document.createElement('span');
                 copySymbol.className = 'copy-symbol';
-                copySymbol.onclick = function() { copyToClipboard(this); }; // Set the onclick event
+                copySymbol.onclick = function() { copyToClipboard(this); };
                 copySymbol.title = "Copy to clipboard";
-                copySymbol.innerHTML = '&#10064;'; // Copy symbol character
+                copySymbol.innerHTML = '&#10064;';
                 
                 // Insert the copy symbol after the new span
                 newSpan.parentNode.insertBefore(copySymbol, newSpan.nextSibling);
             }
         }
         });
-        // updatedData['id'] = currentComponentId;
-        // console.log(`New data: ${JSON.stringify(currentComponent, null, 2)}`);
         await upate_component(currentComponent);
         updateComponents(sortComponents(await fetchComponents()));
         displayComponents(null);
@@ -90,7 +82,6 @@ function toggleEdit() {
         button.innerText = 'Save';
         toggleFields(true);
     } else {
-        // upate_component();
         button.innerText = 'Edit';
         toggleFields(false);
     }
