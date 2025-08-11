@@ -1,4 +1,4 @@
-import { showComponentInfo } from './component-info-panel.js';
+import { showComponentInfo,showAddComponentPanel } from './component-info-panel.js';
 import { getComponents } from './components.js';
 
 const fields = {
@@ -69,7 +69,7 @@ export function displayComponents(componentsDict) {
         addButton.textContent = 'Add';
         addButton.className = 'component-list-add-button';
         addButton.onclick = () => {
-            // openModal(category);
+            showAddComponentPanel(category);
         };
 
         // Append the title and button to the header div

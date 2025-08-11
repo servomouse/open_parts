@@ -28,16 +28,22 @@ def get_components():
 @app.route('/api/add_component', methods=['POST'])
 def add_component():
     data = request.json
-    print(f"Received new component data: {data}")
-    db.add_component(data)
-    return "Component added"
+    print(f"Creating new component: {data}")
+    new_id = db.add_component(data)
+    print(f"New cmponent id: {new_id}")
+    data = jsonify({'id': new_id})
+    return data
 
 # API endpoint to add a new component
 @app.route('/api/update_component', methods=['POST'])
 def update_component():
     data = request.json
-    print(f"Received new component data: {data}")
-    db.edit_component(data)
+    print(f"Updating component: {data}")
+    if int(data['amount']) == 0:
+        print(f"Removing component {data['id']}")
+        db.remove_component(data['id'])
+    else:
+        db.edit_component(data)
     return "Component added"
 
 

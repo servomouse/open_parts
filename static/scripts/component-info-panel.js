@@ -1,7 +1,8 @@
-import { fetchComponents, upate_component } from './network.js';
-import { updateComponents } from './components.js';
+import { fetchComponents, upate_component, add_component } from './network.js';
+import { updateComponents, getComponentsStats } from './components.js';
 import { sortComponents } from './sorting.js';
 import { displayComponents } from './components-table-panel.js';
+import { updateComponentsStats, createComponentsStatsSection } from './components-stats.js';
 
 let currentComponentId = 0;
 let currentComponent = null;
@@ -51,7 +52,12 @@ async function toggleFields(editable) {
             newSpan.innerText = input.value;
             newSpan.id = input.id;
             const key = newSpan.id.replace("component-info-input-", "");
-            currentComponent[key] = newSpan.innerText;
+            console.log(`Processing key: ${key}`);
+            if(key === 'amount') {
+                currentComponent[key] = parseInt(newSpan.innerText);
+            } else {
+                currentComponent[key] = newSpan.innerText;
+            }
             
             // Replace the input with the new span
             input.parentNode.replaceChild(newSpan, input);
@@ -69,7 +75,19 @@ async function toggleFields(editable) {
             }
         }
         });
-        await upate_component(currentComponent);
+        console.log(`Current component ID: ${currentComponentId}`);
+        if(currentComponentId === 0) {
+            currentComponentId = await add_component(currentComponent);
+            currentComponent['id'] = currentComponentId;
+            console.log(`New component ID: ${currentComponentId}`);
+        } else {
+            await upate_component(currentComponent);
+            if(currentComponent['amount'] === 0) {  // Component was deleted, show stats
+                createComponentsStatsSection();
+                updateComponentsStats(getComponentsStats());
+                return;
+            }
+        }
         updateComponents(sortComponents(await fetchComponents()));
         displayComponents(null);
         showComponentInfo(currentComponent);
@@ -91,7 +109,9 @@ function toggleEdit() {
 const COMP_FIELDS = {
     "Resistors": ["value", "precision", "package", "technology", "description", "image", "kicad_footprint", "kicad_symbol", "model_3d", "amount"],
     "Capacitors": ["value", "voltage", "package", "technology", "description", "image", "kicad_footprint", "kicad_symbol", "model_3d", "amount"],
-    "ICs": ["subcategory", "group_name", "name", "package", "technology", "description", "image", "kicad_footprint", "kicad_symbol", "model_3d", "amount"]
+    "ICs": ["subcategory", "group_name", "name", "package", "technology", "description", "datasheet", "image", "kicad_footprint", "kicad_symbol", "model_3d", "amount"],
+    "new": ["category", "subcategory", "group_name", "name", "package", "value", "precision", "voltage", "technology", "description", "image", "kicad_footprint", "kicad_symbol", "model_3d", "amount"],
+    "default": ["category", "subcategory", "group_name", "name", "package", "value", "precision", "voltage", "technology", "description", "image", "kicad_footprint", "kicad_symbol", "model_3d", "amount"],
 };
 const COPY_SYMBOL_FIELDS = ["kicad_footprint", "kicad_symbol", "model_3d"];
 
@@ -100,11 +120,43 @@ export function showComponentInfo(componentData) {
     initializeComponentInfo(componentData);
     const infoPanel = document.getElementById('right-section');
     
-    const componentInfoSection = createComponentInfoSection(componentData);
+    const componentInfoSection = createComponentInfoSection(componentData, false);
     infoPanel.appendChild(componentInfoSection);
     
     const imageModelSection = createImageAndModelSection(componentData);
     infoPanel.appendChild(imageModelSection);
+}
+
+export function showAddComponentPanel(componentCategory) {
+    const newComponentTemplate = {
+        "id": 0,
+        "category": componentCategory,
+        "subcategory": "",
+        "group_name": "",
+        "name": "",
+        "package": "",
+        "value": "",
+        "precision": "",
+        "voltage": "",
+        "technology": "",
+        "description": "",
+        "datasheet": "",
+        "image": "static/images/default.jpg",
+        "kicad_footprint": "",
+        "kicad_symbol": "",
+        "model_3d": "static/images/no_3d_model.png",
+        "amount": 0,
+    }
+    initializeComponentInfo(newComponentTemplate);
+    const infoPanel = document.getElementById('right-section');
+    
+    const componentInfoSection = createComponentInfoSection(newComponentTemplate, true);
+    infoPanel.appendChild(componentInfoSection);
+    
+    const imageModelSection = createImageAndModelSection(newComponentTemplate);
+    infoPanel.appendChild(imageModelSection);
+    
+    toggleEdit();
 }
 
 // Initialize component data and display panel
@@ -118,12 +170,17 @@ function initializeComponentInfo(componentData) {
 }
 
 // Create the component info section
-function createComponentInfoSection(componentData) {
+function createComponentInfoSection(componentData, isNew) {
     const componentInfoDiv = document.createElement('div');
     componentInfoDiv.className = 'component-info';
     
-    const header = createComponentInfoHeader(componentData);
-    componentInfoDiv.appendChild(header);
+    if(isNew) {
+        const header = createComponentInfoHeader(componentData, `Add new ${componentData['category'].slice(0, -1)}`);
+        componentInfoDiv.appendChild(header);
+    } else {
+        const header = createComponentInfoHeader(componentData, "Component Details");
+        componentInfoDiv.appendChild(header);
+    }
     
     const infoList = createComponentInfoList(componentData);
     componentInfoDiv.appendChild(infoList);
@@ -135,9 +192,9 @@ function createComponentInfoSection(componentData) {
 }
 
 // Create the component info header
-function createComponentInfoHeader(componentData) {
+function createComponentInfoHeader(componentData, header) {
     const componentHeader = document.createElement('h2');
-    componentHeader.innerText = "Component Details";
+    componentHeader.innerText = header;
     
     const componentName = document.createElement('h3');
     componentName.innerText = componentData['description'];
@@ -152,8 +209,12 @@ function createComponentInfoHeader(componentData) {
 // Create the component info list
 function createComponentInfoList(componentData) {
     const componentInfoTable = document.createElement('ul');
+    let key = "default";
+    if(componentData['category'] in COMP_FIELDS) {
+        key = componentData['category'];
+    }
     
-    for (const parameter of COMP_FIELDS[componentData['category']]) {
+    for (const parameter of COMP_FIELDS[key]) {
         const hasCopyButton = COPY_SYMBOL_FIELDS.includes(parameter);
         const listItem = createComponentInfoListItem(
             parameter, 
@@ -212,23 +273,28 @@ function createEditButton() {
 function createImageAndModelSection(componentData) {
     const imageModelContainer = document.createElement('div');
     imageModelContainer.className = 'image-and-model-container';
-    
-    const componentImage = createComponentImage(componentData);
+
+    const componentImage = createComponentImage(componentData, componentData["image"]);
     imageModelContainer.appendChild(componentImage);
-    
-    const componentModel = createComponentModel(componentData);
-    imageModelContainer.appendChild(componentModel);
+
+    if(componentData['model_3d'] === "static/images/no_3d_model.png") {
+        const componentImage = createComponentImage(componentData, componentData["model_3d"]);
+        imageModelContainer.appendChild(componentImage);
+    } else {
+        const componentModel = createComponentModel(componentData);
+        imageModelContainer.appendChild(componentModel);
+    }
     
     return imageModelContainer;
 }
 
 // Create the component image
-function createComponentImage(componentData) {
+function createComponentImage(componentData, src) {
     const componentImageDiv = document.createElement('div');
     componentImageDiv.className = 'component-image-div';
     
     const componentImage = document.createElement('img');
-    componentImage.src = componentData["image"];
+    componentImage.src = src;
     componentImage.className = 'component-image';
     componentImage.alt = componentData['description'];
     

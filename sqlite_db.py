@@ -13,6 +13,7 @@ tables_structs = {
         "voltage":          "TEXT",
         "technology":       "TEXT",
         "description":      "TEXT",
+        "datasheet":        "TEXT",
         "image":            "TEXT",
         "kicad_footprint":  "TEXT",
         "kicad_symbol":     "TEXT",
@@ -63,13 +64,23 @@ class SQLiteIface:
         self.execute_command(command, None)
 
     def add_component(self, data):
+        """ Returns in ID of newly added component """
         keys = list(tables_structs['components'].keys())
         keys.remove('id')
         values = []
         for key in keys:
             values.append(data[key])
         command = 'INSERT INTO components (' + ', '.join(keys) + ') VALUES (' + ', '.join(['?' for _ in range(len(keys))]) + ')'
-        self.execute_command(command, tuple(values))
+        # self.execute_command(command, tuple(values))
+        try:
+            with sqlite3.connect(self.db) as conn:
+                cursor = conn.cursor()
+                cursor.execute(command, values)
+                new_id = cursor.lastrowid
+                conn.commit()
+        except sqlite3.Error as e:
+            print(f"An error occurred: {e}")
+        return new_id
 
     def remove_component(self, component_id):
         self.execute_command('DELETE FROM components WHERE id = ?', (component_id,))
@@ -178,3 +189,22 @@ test_comp_list = [
 #     for comp in test_comp_list:
 #         db.add_component(comp)
 #     print(f"{db.export_table_to_dict('components') = }")
+
+# Add a field (column) to a table:
+if __name__ == "__main__":
+
+    connection = sqlite3.connect('database/components.db')  # Replace with your database file
+    cursor = connection.cursor()
+
+    table_name = 'components'
+    new_column_name = 'datasheet'
+    new_column_type = 'TEXT'
+
+    try:
+        cursor.execute(f'ALTER TABLE {table_name} ADD COLUMN {new_column_name} {new_column_type};')
+        print(f'Column "{new_column_name}" added to table "{table_name}".')
+    except sqlite3.Error as e:
+        print(f'An error occurred: {e}')
+
+    connection.commit()
+    connection.close()
